@@ -1,0 +1,38 @@
+<!DOCTYPE HTML>
+<html de xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8" />
+    <title>Medikament hinzufügen</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+</head>
+<body>
+<h1>Medikament anlegen</h1>
+
+<!--
+   In Thymeleaf the equivalent of
+   JSP's ${pageContext.request.contextPath}/edit.html
+   would be @{/edit.html}
+   -->
+
+<form th:action="@{/addMedikament}"
+      th:object="${personForm}" method="POST">
+    First Name:
+    <input type="text" th:field="*{}" />
+    <br/>
+    Last Name:
+    <input type="text" th:field="*{lastName}" />
+    <br/>
+    <input type="submit" value="Create" />
+</form>
+
+<br/>
+
+<!-- Check if errorMessage is not null and not empty -->
+
+<div th:if="${errorMessage}" th:utext="${errorMessage}"
+     style="color:#4fdbff;font-style:italic;">
+    ...
+</div>
+
+</body>
+</html>
