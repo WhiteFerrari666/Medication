@@ -1,11 +1,21 @@
 <!DOCTYPE html>
-<html lang="de">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Willkommen in deiner MedicationApp</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 </head>
 <body>
-    <p>Get your greeting <a href="/greeting">here</a></p>
+<h1> Willkommen!</h1>
+<h2> Die ist unsere koralle MedApp</h2>
+
+<!--
+         In Thymeleaf the equivalent of
+         JSP's ${pageContext.request.contextPath}/edit.html
+         would be @{/edit.html}
+         -->
+<a th:href="@{/medikamentenListe}">Medikamenten Liste</a>
+
 </body>
+
 </html>
