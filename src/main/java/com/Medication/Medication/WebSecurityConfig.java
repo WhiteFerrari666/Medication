@@ -12,8 +12,8 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
  */
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
-	/*
-	 * 
+/*
+	 *
 	 * @Autowired public void configureGlobal(AuthenticationManagerBuilder auth)
 	 * throws Exception { auth.inMemoryAuthentication()
 	 * .withUser("user").password("password").roles("USER") .and()
@@ -32,6 +32,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	 * .antMatchers("/admin/**").hasRole("ADMIN")
 	 * .and().httpBasic().and().formLogin().loginPage("/login").permitAll(); }
 	 * 
-	 */
+*/
 
 }
