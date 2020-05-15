@@ -12,10 +12,12 @@
 <div>
     <table border="1">
         <tr>
-            <th>First Name</th>
+            <th>Name</th>
+            <th>Dosis</th>
         </tr>
-        <tr th:each ="medikament : ${medikament}">
-            <td th:utext="${medikament.Name}">...</td>
+        <tr th:each="medikament : ${medikamente}">
+            <td th:utext="${medikament.name}">...</td>
+            <td th:utext="${medikament.dosis}">...</td>
         </tr>
     </table>
 </div>

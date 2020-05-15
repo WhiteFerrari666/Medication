@@ -15,14 +15,14 @@
    -->
 
 <form th:action="@{/addMedikament}"
-      th:object="${personForm}" method="POST">
+      th:object="${medikamentForm}" method="POST">
     First Name:
-    <input type="text" th:field="*{}" />
+    <input type="text" th:field="*{name}"/>
     <br/>
     Last Name:
-    <input type="text" th:field="*{lastName}" />
+    <input type="text" th:field="*{dosis}"/>
     <br/>
-    <input type="submit" value="Create" />
+    <input type="submit" value="Create"/>
 </form>
 
 <br/>
