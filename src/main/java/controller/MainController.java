@@ -23,7 +23,7 @@ public class MainController {
 		medikamente.add(new Medikament("Ibuprofen", 3));
 	}
 
-	// Aus Application.properties abspritzen (inject).
+	// Aus Application.properties ziehen.
 	@Value("${welcome.message}")
 	private String message;
 
