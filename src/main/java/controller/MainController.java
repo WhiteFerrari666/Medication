@@ -19,7 +19,7 @@ public class MainController {
 	private static List<Medikament> medikamente = new ArrayList<Medikament>();
 
 	static {
-		medikamente.add(new Medikament("Antibiotika", 5));
+		medikamente.add(new Medikament("Antibiotika", 1));
 		medikamente.add(new Medikament("Ibuprofen", 3));
 	}
 
@@ -30,6 +30,8 @@ public class MainController {
 	@Value("${error.message}")
 	private String errorMessage;
 
+	// TODO mde Annotations durch neue, kürzere Varianten ersetzen (@GetMapping,
+	// @PostMapping, etc.)
 	@RequestMapping(value = {"/", "/index"}, method = RequestMethod.GET)
 	public String index(Model model) {
 

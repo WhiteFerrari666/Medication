@@ -4,6 +4,7 @@ public class Medikament {
 
 	private String name;
 	private int dosis;
+	// private String beipackzettelHyperlink;
 
 	public Medikament() {
 

@@ -3,10 +3,12 @@
 <head>
     <meta charset="UTF-8"/>
     <title>MedicationApp v0.0.2</title>
+
+    <link href="webjars/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
     <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
 </head>
 <body>
-<h1>Welcome</h1>
+<h1>MedicationApp</h1>
 <h2 th:utext="${message}">..!..</h2>
 
 <!--
@@ -16,9 +18,22 @@
    would be @{/edit.html}
 
    -->
+<ul id="Menu">
+    <a th:href="@{/index}">Startseite</a>
 
-<a th:href="@{/medikamentenListe}">Deine Medikamente</a>
+    <ul class="nested">
+        <li><span class="&#9744;">Mein Tag</span>
+        <li><a th:href="@{/medikamentenListe}">Meine Medikamente</a>
+        <li><span class="&#9744;">Meine Erinnerungen</span>
+        <li><span class="&#9744;">Mein Kalender</span>
+    </ul>
+    </li>
+</ul>
 
+<div/>
+<script src="webjars/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<script src="webjars/jquery/1.9.1/jquery.min.js"></script>
+</div>
 </body>
 
 </html>

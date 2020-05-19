@@ -1,8 +1,9 @@
 <!DOCTYPE HTML>
-<html de xmlns:th="http://www.w3.org/1999/xhtml">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8" />
+    <meta charset="UTF-8"/>
     <title>Medikament hinzufügen</title>
+    <link href="webjars/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
     <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
 </head>
 <body>
@@ -16,13 +17,13 @@
 
 <form th:action="@{/addMedikament}"
       th:object="${medikamentForm}" method="POST">
-    First Name:
+    Name:
     <input type="text" th:field="*{name}"/>
     <br/>
-    Last Name:
+    Dosis:
     <input type="text" th:field="*{dosis}"/>
     <br/>
-    <input type="submit" value="Create"/>
+    <input type="submit" value="hinzufügen"/>
 </form>
 
 <br/>
