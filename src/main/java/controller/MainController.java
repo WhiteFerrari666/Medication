@@ -76,4 +76,10 @@ public class MainController {
 		return "addMedikament";
 	}
 
+	@RequestMapping(value = {"/kalender"}, method = RequestMethod.GET)
+	public String kalender(Model model) {
+
+		return "kalender";
+	}
+
 }
