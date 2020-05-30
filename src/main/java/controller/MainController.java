@@ -6,17 +6,19 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import form.MedikamentForm;
+import model.KalenderTermin;
 import model.Medikament;
 
 @Controller
 public class MainController {
 
 	private static List<Medikament> medikamente = new ArrayList<Medikament>();
+	private static List<KalenderTermin> termine = new ArrayList<KalenderTermin>();
 
 	static {
 		medikamente.add(new Medikament("Antibiotika", 1));
@@ -32,7 +34,7 @@ public class MainController {
 
 	// TODO mde Annotations durch neue, kürzere Varianten ersetzen (@GetMapping,
 	// @PostMapping, etc.)
-	@RequestMapping(value = {"/", "/index"}, method = RequestMethod.GET)
+	@GetMapping(value = {"/", "/index"})
 	public String index(Model model) {
 
 		model.addAttribute("message", message);
@@ -40,7 +42,8 @@ public class MainController {
 		return "index";
 	}
 
-	@RequestMapping(value = {"/medikamentenListe"}, method = RequestMethod.GET)
+	// Medikamente
+	@GetMapping(value = {"/medikamentenListe"})
 	public String medikamentenListe(Model model) {
 
 		model.addAttribute("medikamente", medikamente);
@@ -48,7 +51,7 @@ public class MainController {
 		return "medikamentenListe";
 	}
 
-	@RequestMapping(value = {"/addMedikament"}, method = RequestMethod.GET)
+	@GetMapping(value = {"/addMedikament"})
 	public String showAddMedikament(Model model) {
 
 		MedikamentForm medikamentForm = new MedikamentForm();
@@ -57,7 +60,7 @@ public class MainController {
 		return "addMedikament";
 	}
 
-	@RequestMapping(value = {"/addMedikament"}, method = RequestMethod.POST)
+	@PostMapping(value = {"/addMedikament"})
 	public String saveMedikament(Model model, //
 			@ModelAttribute("medikamentForm") MedikamentForm medikamentForm) {
 
@@ -76,7 +79,8 @@ public class MainController {
 		return "addMedikament";
 	}
 
-	@RequestMapping(value = {"/kalender"}, method = RequestMethod.GET)
+	// Kalender
+	@GetMapping(value = {"/kalender"})
 	public String kalender(Model model) {
 
 		return "kalender";
