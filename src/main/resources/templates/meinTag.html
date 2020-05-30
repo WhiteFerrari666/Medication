@@ -1,0 +1,36 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>MedicationApp v0.0.2</title>
+
+    <link href="webjars/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+</head>
+<body>
+<!--
+
+   In Thymeleaf the equivalent of
+   JSP's ${pageContext.request.contextPath}/edit.html
+   would be @{/edit.html}
+
+   -->
+<ul id="Menu">
+    <a th:href="@{/index}">Startseite</a>
+
+    <ul class="nested">
+        <li><a th:href="@{/meinTag}">Mein Tag</a>
+        <li><a th:href="@{/medikamentenListe}">Meine Medikamente</a>
+        <li><span class="&#9744;">Meine Erinnerungen</span>
+        <li><span class="&#9744;">Mein Kalender</span>
+    </ul>
+    </li>
+</ul>
+
+<div/>
+<script src="webjars/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<script src="webjars/jquery/1.9.1/jquery.min.js"></script>
+</div>
+</body>
+
+</html>

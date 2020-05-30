@@ -88,6 +88,9 @@ public class MainController {
 		model.addAttribute("errorMessage", errorMessage);
 		return "addMedikament";
 	}
+	@RequestMapping(value = {"/meinTag"}, method = RequestMethod.GET)
+	public void meinTag(Model model) {
+	}
 
 	@GetMapping(value = {"/erinnerungenListe"})
 	public String erinnerungenListe(Model model) {
