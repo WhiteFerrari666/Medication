@@ -3,8 +3,6 @@ package controller;
 import java.util.ArrayList;
 import java.util.List;
 
-import form.ErinnerungForm;
-import model.Erinnerung;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,7 +10,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import form.ErinnerungForm;
 import form.MedikamentForm;
+import model.Erinnerung;
 import model.KalenderTermin;
 import model.Medikament;
 
@@ -87,7 +87,7 @@ public class MainController {
 		return "addMedikament";
 	}
 
-	@RequestMapping(value = {"/erinnerungenListe"}, method = RequestMethod.GET)
+	@GetMapping(value = {"/erinnerungenListe"})
 	public String erinnerungenListe(Model model) {
 
 
@@ -95,7 +95,7 @@ public class MainController {
 		return "erinnerungenListe";
 	}
 
-	@RequestMapping(value = {"/addErinnerung"}, method = RequestMethod.GET)
+	@GetMapping(value = {"/addErinnerung"})
 	public String showAddErinnerung(Model model) {
 
 		ErinnerungForm erinnerungForm = new ErinnerungForm();
@@ -104,7 +104,7 @@ public class MainController {
 		return "addErinnerung";
 	}
 
-	@RequestMapping(value = {"/addErinnerung"}, method = RequestMethod.POST)
+	@GetMapping(value = {"/addErinnerung"})
 	public String saveErinnerung(Model model, //
 								 @ModelAttribute("erinnerungForm") ErinnerungForm erinnerungForm) {
 
@@ -123,7 +123,7 @@ public class MainController {
 		return "addErinnerung";
 	}
 
-	@RequestMapping(value = {"/kalender"}, method = RequestMethod.GET)
+	@GetMapping(value = {"/kalender"})
 	public String kalender(Model model) {
 
 		return "kalender";
