@@ -21,114 +21,119 @@ import model.Medikament;
 @Controller
 public class MainController {
 
-	private static List<Medikament> medikamente = new ArrayList<Medikament>();
-	private static List<KalenderTermin> termine = new ArrayList<KalenderTermin>();
+    private static List<Medikament> medikamente = new ArrayList<Medikament>();
+    private static List<KalenderTermin> termine = new ArrayList<KalenderTermin>();
 
-	static {
-		medikamente.add(new Medikament("Antibiotika", 1));
-		medikamente.add(new Medikament("Ibuprofen", 3));
-	}
-	private static List<Erinnerung> erinnerungen = new ArrayList<Erinnerung>();
+    static {
+        medikamente.add(new Medikament("Antibiotika", 1));
+        medikamente.add(new Medikament("Ibuprofen", 3));
+    }
 
-	static {
-		erinnerungen.add(new Erinnerung("Test", 4));
-	}
+    private static List<Erinnerung> erinnerungen = new ArrayList<Erinnerung>();
 
-
-	// Aus Application.properties ziehen.
-	@Value("${welcome.message}")
-	private String message;
-
-	@Value("${error.message}")
-	private String errorMessage;
-
-	// TODO mde Annotations durch neue, kürzere Varianten ersetzen (@GetMapping,
-	// @PostMapping, etc.)
-	@GetMapping(value = {"/", "/index"})
-	public String index(Model model) {
-
-		model.addAttribute("message", message);
-
-		return "index";
-	}
-
-	// Medikamente
-	@GetMapping(value = {"/medikamentenListe"})
-	public String medikamentenListe(Model model) {
-
-		model.addAttribute("medikamente", medikamente);
-
-		return "medikamentenListe";
-	}
-
-	@GetMapping(value = {"/addMedikament"})
-	public String showAddMedikament(Model model) {
-
-		MedikamentForm medikamentForm = new MedikamentForm();
-		model.addAttribute("medikamentForm", medikamentForm);
-
-		return "addMedikament";
-	}
-
-	@PostMapping(value = {"/addMedikament"})
-	public String saveMedikament(Model model, //
-			@ModelAttribute("medikamentForm") MedikamentForm medikamentForm) {
-
-		String name = medikamentForm.getName();
-		int dosis = medikamentForm.getDosis();
-
-		if (name != null && name.length() > 0 //
-				&& dosis != 0) {
-			Medikament newMedikament = new Medikament(name, dosis);
-			medikamente.add(newMedikament);
-
-			return "redirect:/medikamentenListe";
-		}
-
-		model.addAttribute("errorMessage", errorMessage);
-		return "addMedikament";
-	}
-
-	@GetMapping(value = {"/erinnerungenListe"})
-	public String erinnerungenListe(Model model) {
+    static {
+        erinnerungen.add(new Erinnerung("Test", 4));
+    }
 
 
-		model.addAttribute("erinnerung", erinnerungen);
-		return "erinnerungenListe";
-	}
+    // Aus Application.properties ziehen.
+    @Value("${welcome.message}")
+    private String message;
 
-	@GetMapping(value = {"/addErinnerung"})
-	public String showAddErinnerung(Model model) {
+    @Value("${error.message}")
+    private String errorMessage;
 
-		ErinnerungForm erinnerungForm = new ErinnerungForm();
-		model.addAttribute("erinnerungForm", erinnerungForm);
+    // TODO mde Annotations durch neue, kürzere Varianten ersetzen (@GetMapping,
+    // @PostMapping, etc.)
+    @GetMapping(value = {"/", "/index"})
+    public String index(Model model) {
 
-		return "addErinnerung";
-	}
+        model.addAttribute("message", message);
 
-	@PostMapping(value = {"/addErinnerung"})
-	public String saveErinnerung(Model model, //
-								 @ModelAttribute("erinnerungForm") ErinnerungForm erinnerungForm) {
+        return "index";
+    }
 
-		String name = erinnerungForm.getName();
-		int dosis = erinnerungForm.getDosis();
+    // Medikamente
+    @GetMapping(value = {"/medikamentenListe"})
+    public String medikamentenListe(Model model) {
 
-		if (name != null && name.length() > 0 //
-				&& dosis != 0) {
-			Erinnerung newErinnerung = new Erinnerung(name, dosis);
-			erinnerungen.add(newErinnerung);
+        model.addAttribute("medikamente", medikamente);
 
-			return "redirect:/erinnerungenListe";
-		}
+        return "medikamentenListe";
+    }
 
-		model.addAttribute("errorMessage", errorMessage);
-		return "addErinnerung";
-	}
+    @GetMapping(value = {"/addMedikament"})
+    public String showAddMedikament(Model model) {
 
-	@GetMapping(value = {"/kalender"})
-	public String kalender(Model model) {
+        MedikamentForm medikamentForm = new MedikamentForm();
+        model.addAttribute("medikamentForm", medikamentForm);
 
-		return "kalender";
-	}
+        return "addMedikament";
+    }
+
+    @PostMapping(value = {"/addMedikament"})
+    public String saveMedikament(Model model, //
+                                 @ModelAttribute("medikamentForm") MedikamentForm medikamentForm) {
+
+        String name = medikamentForm.getName();
+        int dosis = medikamentForm.getDosis();
+
+        if (name != null && name.length() > 0 //
+                && dosis != 0) {
+            Medikament newMedikament = new Medikament(name, dosis);
+            medikamente.add(newMedikament);
+
+            return "redirect:/medikamentenListe";
+        }
+
+        model.addAttribute("errorMessage", errorMessage);
+        return "addMedikament";
+    }
+
+    @GetMapping(value = {"/meinTag"})
+    public void meinTag(Model model) {
+    }
+
+    @GetMapping(value = {"/erinnerungenListe"})
+    public String erinnerungenListe(Model model) {
+
+
+        model.addAttribute("erinnerung", erinnerungen);
+        return "erinnerungenListe";
+    }
+
+    @GetMapping(value = {"/addErinnerung"})
+    public String showAddErinnerung(Model model) {
+
+        ErinnerungForm erinnerungForm = new ErinnerungForm();
+        model.addAttribute("erinnerungForm", erinnerungForm);
+
+        return "addErinnerung";
+    }
+
+    @PostMapping(value = {"/addErinnerung"})
+    public String saveErinnerung(Model model, //
+                                 @ModelAttribute("erinnerungForm") ErinnerungForm erinnerungForm) {
+
+        String name = erinnerungForm.getName();
+        int dosis = erinnerungForm.getDosis();
+
+        if (name != null && name.length() > 0 //
+                && dosis != 0) {
+            Erinnerung newErinnerung = new Erinnerung(name, dosis);
+            erinnerungen.add(newErinnerung);
+
+            return "redirect:/erinnerungenListe";
+        }
+
+        model.addAttribute("errorMessage", errorMessage);
+        return "addErinnerung";
+    }
+
+    @GetMapping(value = {"/kalender"})
+    public String kalender(Model model) {
+
+        return "kalender";
+    }
 
 }
