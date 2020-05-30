@@ -3,6 +3,8 @@ package controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import form.ErinnerungForm;
+import model.Erinnerung;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,6 +26,12 @@ public class MainController {
 		medikamente.add(new Medikament("Antibiotika", 1));
 		medikamente.add(new Medikament("Ibuprofen", 3));
 	}
+	private static List<Erinnerung> erinnerungen = new ArrayList<Erinnerung>();
+
+	static {
+		erinnerungen.add(new Erinnerung("Test", 4));
+	}
+
 
 	// Aus Application.properties ziehen.
 	@Value("${welcome.message}")
@@ -79,8 +87,43 @@ public class MainController {
 		return "addMedikament";
 	}
 
-	// Kalender
-	@GetMapping(value = {"/kalender"})
+	@RequestMapping(value = {"/erinnerungenListe"}, method = RequestMethod.GET)
+	public String erinnerungenListe(Model model) {
+
+
+		model.addAttribute("erinnerung", erinnerungen);
+		return "erinnerungenListe";
+	}
+
+	@RequestMapping(value = {"/addErinnerung"}, method = RequestMethod.GET)
+	public String showAddErinnerung(Model model) {
+
+		ErinnerungForm erinnerungForm = new ErinnerungForm();
+		model.addAttribute("erinnerungForm", erinnerungForm);
+
+		return "addErinnerung";
+	}
+
+	@RequestMapping(value = {"/addErinnerung"}, method = RequestMethod.POST)
+	public String saveErinnerung(Model model, //
+								 @ModelAttribute("erinnerungForm") ErinnerungForm erinnerungForm) {
+
+		String name = erinnerungForm.getName();
+		int dosis = erinnerungForm.getDosis();
+
+		if (name != null && name.length() > 0 //
+				&& dosis != 0) {
+			Erinnerung newErinnerung = new Erinnerung(name, dosis);
+			erinnerungen.add(newErinnerung);
+
+			return "redirect:/erinnerungenListe";
+		}
+
+		model.addAttribute("errorMessage", errorMessage);
+		return "addErinnerung";
+	}
+
+	@RequestMapping(value = {"/kalender"}, method = RequestMethod.GET)
 	public String kalender(Model model) {
 
 		return "kalender";
