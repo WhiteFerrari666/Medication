@@ -3,6 +3,8 @@ package controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import form.ErinnerungForm;
+import model.Erinnerung;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -104,7 +106,7 @@ public class MainController {
 		return "addErinnerung";
 	}
 
-	@GetMapping(value = {"/addErinnerung"})
+	@PostMapping(value = {"/addErinnerung"})
 	public String saveErinnerung(Model model, //
 								 @ModelAttribute("erinnerungForm") ErinnerungForm erinnerungForm) {
 
