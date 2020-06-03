@@ -1,6 +1,8 @@
 package controller;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import form.ErinnerungForm;
@@ -23,16 +25,14 @@ public class MainController {
 
     private static List<Medikament> medikamente = new ArrayList<Medikament>();
     private static List<KalenderTermin> termine = new ArrayList<KalenderTermin>();
+    private static List<Erinnerung> erinnerungen = new ArrayList<Erinnerung>();
 
+    static Date dt = new Date();
     static {
         medikamente.add(new Medikament("Antibiotika", 1));
         medikamente.add(new Medikament("Ibuprofen", 3));
-    }
 
-    private static List<Erinnerung> erinnerungen = new ArrayList<Erinnerung>();
-
-    static {
-        erinnerungen.add(new Erinnerung("Test", 4));
+        erinnerungen.add(new Erinnerung("Antibiotika", 4, true, true, false, true, false, true, false, true, dt, dt));
     }
 
 
@@ -115,12 +115,22 @@ public class MainController {
     public String saveErinnerung(Model model, //
                                  @ModelAttribute("erinnerungForm") ErinnerungForm erinnerungForm) {
 
-        String name = erinnerungForm.getName();
+        String bezeichnung = erinnerungForm.getBezeichnung();
         int dosis = erinnerungForm.getDosis();
+        boolean aktiv = erinnerungForm.isAktiv();
+        boolean montag = erinnerungForm.isMontag();
+        boolean dienstag = erinnerungForm.isDienstag();
+        boolean mittwoch = erinnerungForm.isMittwoch();
+        boolean donnerstag = erinnerungForm.isDonnerstag();
+        boolean freitag = erinnerungForm.isFreitag();
+        boolean samstag = erinnerungForm.isSamstag();
+        boolean sonntag = erinnerungForm.isSonntag();
+        Date anfangsdatum = erinnerungForm.getAnfangsdatum();
+        Date enddatum = erinnerungForm.getEnddatum();
 
-        if (name != null && name.length() > 0 //
+        if (bezeichnung != null && bezeichnung.length() > 0 //
                 && dosis != 0) {
-            Erinnerung newErinnerung = new Erinnerung(name, dosis);
+            Erinnerung newErinnerung = new Erinnerung(bezeichnung, dosis, aktiv, montag, dienstag, mittwoch, donnerstag, freitag, samstag, sonntag, anfangsdatum, enddatum);
             erinnerungen.add(newErinnerung);
 
             return "redirect:/erinnerungenListe";

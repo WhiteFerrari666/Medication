@@ -7,21 +7,67 @@
     <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
 </head>
 <body>
-<h1>Meine Erinnerungen</h1>
-<br/><br/>
+<div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+        <h1>Meine Erinnerungen</h1>
+    </div>
+    <div class="col-md-4"></div>
+</div>
 
-<br/><br/>
-<ul id="Menü">
-    <a th:href="@{/index}">Startseite</a>
-
-    <ul class="nested">
-        <li><a th:href="@{/meinTag}">Mein Tag</a>
-        <li><a th:href="@{/medikamentenListe}">Meine Medikamente</a>
-        <li><a th:href="@{/erinnerungenListe}">Meine Erinnerungen</a>
-        <li><a th:href="@{/kalender}">Mein Kalender</a>
-    </ul>
-    </li>
-</ul>
+<div class="row">
+    <div class="col-md"></div>
+    <div class="col-md-2">
+        <ul id="Menü">
+            <a th:href="@{/index}">Startseite</a>
+            <ul class="nested">
+                <li><a th:href="@{/meinTag}">Mein Tag</a>
+                <li><a th:href="@{/medikamentenListe}">Meine Medikamente</a>
+                <li><a th:href="@{/erinnerungenListe}">Meine Erinnerungen</a>
+                <li><a th:href="@{/kalender}">Mein Kalender</a>
+            </ul>
+            </li>
+        </ul>
+    </div>
+    <div class="col-md-7"><h2>Erinnerungen</h2>
+        <p></p>
+        <a href="addErinnerung">Füge eine Erinnerung hinzu</a>
+        <p></p>
+        <table border="1">
+            <tr>
+                <th>Name</th>
+                <th>Dosis</th>
+                <th>Aktiv</th>
+                <th>Montag</th>
+                <th>Dienstag</th>
+                <th>Mittwoch</th>
+                <th>Donnerstag</th>
+                <th>Freitag</th>
+                <th>Samstag</th>
+                <th>Sonntag</th>
+                <th>Anfangsdatum</th>
+                <th>Enddatum</th>
+            </tr>
+            <tr th:each="erinnerung : ${erinnerungen}">
+                <td th:utext="${erinnerung.bezeichnung}">...</td>
+                <td th:utext="${erinnerung.dosis}">...</td>
+                <td th:utext="${erinnerung.aktiv}">...</td>
+                <td th:utext="${erinnerung.montag}">...</td>
+                <td th:utext="${erinnerung.dienstag}">...</td>
+                <td th:utext="${erinnerung.mittwoch}">...</td>
+                <td th:utext="${erinnerung.donnerstag}">...</td>
+                <td th:utext="${erinnerung.freitag}">...</td>
+                <td th:utext="${erinnerung.samstag}">...</td>
+                <td th:utext="${erinnerung.sonntag}">...</td>
+                <td th:utext="${erinnerung.anfangsdatum}">...</td>
+                <td th:utext="${erinnerung.enddatum}">...</td>
+            </tr>
+        </table>
+    </div>
+    <div class="col-md-3">
+        <br></br>
+    </div>
+</div>
 
 </body>
 </html>

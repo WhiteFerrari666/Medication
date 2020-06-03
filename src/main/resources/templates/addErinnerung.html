@@ -1,10 +1,148 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <meta charset="UTF-8"/>
+    <title>Erinnerung hinzufügen</title>
+    <link href="webjars/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
 </head>
 <body>
+<div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+        <h1>Erinnerung anlegen</h1>
+    </div>
+    <div class="col-md-4"></div>
+</div>
+<br></br>
+<form th:action="@{/addErinnerung}"
+      th:object="${erinnerungForm}" method="POST">
+
+    <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-1">
+            Bezeichnung:
+            <!--    eigentlich kommt die vom Medikament-->
+        </div>
+        <div class="col-md-6">
+            <input type="text" th:field="*{bezeichnung}"/>
+        </div>
+    </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-1">
+            Dosis:
+        </div>
+        <div class="col-md-6">
+            <input type="text" th:field="*{dosis}"/>
+        </div>
+    </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-1">
+            Aktiv:
+        </div>
+        <div class="col-md-6">
+            <input type="text" th:field="*{aktiv}"/>
+        </div>
+    </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-1">
+            Montag:
+        </div>
+        <div class="col-md-6">
+            <input type="text" th:field="*{montag}"/>
+        </div>
+    </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-1">
+            Dienstag:
+        </div>
+        <div class="col-md-6">
+            <input type="text" th:field="*{dienstag}"/>
+        </div>
+    </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-1">
+            Mittwoch:
+        </div>
+        <div class="col-md-6">
+            <input type="text" th:field="*{mittwoch}"/>
+        </div>
+    </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-1">
+            Donnerstag:
+        </div>
+        <div class="col-md-6">
+            <input type="text" th:field="*{donnerstag}"/>
+        </div>
+    </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-1">
+            Freitag:
+        </div>
+        <div class="col-md-6">
+            <input type="text" th:field="*{freitag}"/>
+        </div>
+    </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-1">
+            Samstag:
+        </div>
+        <div class="col-md-6">
+            <input type="text" th:field="*{samstag}"/>
+        </div>
+    </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-1">
+            Sonntag:
+        </div>
+        <div class="col-md-6">
+            <input type="text" th:field="*{sonntag}"/>
+        </div>
+    </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6"></div>
+        <div class="col-md-3">
+            <br></br>
+            <input type="submit" value="hinzufügen"/>
+        </div>
+    </div>
+</form>
+
+<!-- Check if errorMessage is not null and not empty -->
+
+<div th:if="${errorMessage}" th:utext="${errorMessage}"
+     style="color:#4fdbff;font-style:italic;">
+    ...
+</div>
 
 </body>
 </html>
