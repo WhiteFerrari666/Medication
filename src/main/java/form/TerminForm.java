@@ -1,21 +1,12 @@
-package model;
+package form;
 
 import java.util.Date;
 
-public class KalenderTermin {
+public class TerminForm {
 
 	private String titel;
 	private Date datum;
 	private String webLink;
-
-	public KalenderTermin() {
-	}
-
-	public KalenderTermin(String titel, Date datum, String webLink) {
-		this.titel = titel;
-		this.datum = datum;
-		this.webLink = webLink;
-	}
 
 	public String getTitel() {
 		return titel;
