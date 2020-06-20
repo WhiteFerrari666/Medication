@@ -1,12 +1,10 @@
-package controller;
+package medicationApp.controller;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import form.ErinnerungForm;
-import model.Erinnerung;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,14 +12,18 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import form.ErinnerungForm;
-import form.MedikamentForm;
-import model.Erinnerung;
-import model.KalenderTermin;
-import model.Medikament;
+import medicationApp.dao.ErinnerungenDao;
+import medicationApp.form.ErinnerungForm;
+import medicationApp.form.MedikamentForm;
+import medicationApp.model.Erinnerung;
+import medicationApp.model.KalenderTermin;
+import medicationApp.model.Medikament;
 
 @Controller
 public class MainController {
+
+	@Autowired
+	private ErinnerungenDao erinnerungenDao;
 
     private static List<Medikament> medikamente = new ArrayList<Medikament>();
     private static List<KalenderTermin> termine = new ArrayList<KalenderTermin>();
@@ -35,20 +37,24 @@ public class MainController {
         erinnerungen.add(new Erinnerung("Antibiotika", 4, true, true, false, true, false, true, false, true, dt, dt));
     }
 
-
     // Aus Application.properties ziehen.
     @Value("${welcome.message}")
-    private String message;
+	private String welcomeMessage;
 
     @Value("${error.message}")
     private String errorMessage;
+	@Value("${medikament.error.message}")
+	private String errorMessageMedikament;
+	@Value("${termin.error.message}")
+	private String errorMessageTermin;
+	@Value("${erinnerung.error.message}")
+	private String errorMessageErinnerung;
 
-    // TODO mde Annotations durch neue, kürzere Varianten ersetzen (@GetMapping,
-    // @PostMapping, etc.)
-    @GetMapping(value = {"/", "/index"})
-    public String index(Model model) {
+	// Mappings
+	@GetMapping(value = {"/", "/index"})
+	public String index(Model model) {
 
-        model.addAttribute("message", message);
+		model.addAttribute("message", welcomeMessage);
 
         return "index";
     }
@@ -140,10 +146,13 @@ public class MainController {
         return "addErinnerung";
     }
 
-    @GetMapping(value = {"/kalender"})
-    public String kalender(Model model) {
+	// Kalender
+	@GetMapping(value = {"/kalender"})
+	public String kalender(Model model) {
 
-        return "kalender";
-    }
+		// model.addAttribute("termine", termine);
+
+		return "kalender";
+	}
 
 }

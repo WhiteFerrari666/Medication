@@ -1,4 +1,4 @@
-package model;
+package medicationApp.model;
 
 public class MeinTag {
     private int datum;
