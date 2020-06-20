@@ -1,9 +1,16 @@
 package medicationApp.model;
 
+import javax.persistence.*;
 import java.util.Date;
 
+@Entity
+@Table(name = "erinnerungen")
 public class Erinnerung {
 
+    @Id
+    @GeneratedValue
+    @Column(name = "id", nullable = false)
+    private Long id;
     private String bezeichnung;
     private int dosis;
     private boolean aktiv;
@@ -34,6 +41,13 @@ public class Erinnerung {
         this.sonntag = sonntag;
         this.anfangsdatum = anfangsdatum;
         this.enddatum = enddatum;
+    }
+
+    public Long getId() {
+        return id;
+    }
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getBezeichnung() {

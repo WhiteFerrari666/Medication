@@ -103,7 +103,7 @@ public class MainController {
     @GetMapping(value = {"/erinnerungenListe"})
     public String erinnerungenListe(Model model) {
 
-
+//final List<Erinnerung> erinnerungenListe = (List<Erinnerung>) erinnerungenDao.findAll();
         model.addAttribute("erinnerung", erinnerungen);
         return "erinnerungenListe";
     }
