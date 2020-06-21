@@ -1,6 +1,6 @@
-package form;
+package medicationApp.form;
 
-import model.Medikament;
+import medicationApp.model.Medikament;
 
 public class MeinTagForm {
 

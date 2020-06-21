@@ -1,4 +1,4 @@
-package form;
+package medicationApp.form;
 
 import java.util.Date;
 

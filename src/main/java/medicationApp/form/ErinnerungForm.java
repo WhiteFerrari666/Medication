@@ -1,9 +1,8 @@
-package model;
+package medicationApp.form;
 
 import java.util.Date;
 
-public class Erinnerung {
-
+public class ErinnerungForm {
     private String bezeichnung;
     private int dosis;
     private boolean aktiv;
@@ -16,25 +15,6 @@ public class Erinnerung {
     private boolean sonntag;
     private Date anfangsdatum;
     private Date enddatum;
-
-    public Erinnerung() {
-
-    }
-
-    public Erinnerung(String bezeichnung, int dosis, boolean aktiv, boolean montag, boolean dienstag, boolean mittwoch, boolean donnerstag, boolean freitag, boolean samstag, boolean sonntag, Date anfangsdatum, Date enddatum) {
-        this.bezeichnung = bezeichnung;
-        this.dosis = dosis;
-        this.aktiv = aktiv;
-        this.montag = montag;
-        this.dienstag = dienstag;
-        this.mittwoch = mittwoch;
-        this.donnerstag = donnerstag;
-        this.freitag = freitag;
-        this.samstag = samstag;
-        this.sonntag = sonntag;
-        this.anfangsdatum = anfangsdatum;
-        this.enddatum = enddatum;
-    }
 
     public String getBezeichnung() {
         return bezeichnung;
@@ -132,3 +112,4 @@ public class Erinnerung {
         this.enddatum = enddatum;
     }
 }
+

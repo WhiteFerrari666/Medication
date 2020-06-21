@@ -3,21 +3,18 @@
 <head>
     <meta charset="UTF-8"/>
     <title>Mein Kalender</title>
-    <link href="webjars/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="css/bootstrap.minNeu.css">
     <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
     <link rel="stylesheet" href="css/kalender.css">
 </head>
 <body>
 <div class="row">
-    <div class="col-md-4"></div>
-    <div class="text-center">
+    <div style="width: 100%; text-align: center">
         <h1>Mein Kalender</h1>
     </div>
-    <div class="col-md-4"></div>
 </div>
 
 <div class="row">
-    <div class="col-md"></div>
     <div class="col-md-2">
         <ul id="Menü">
             <a th:href="@{/index}">Startseite</a>

@@ -1,4 +1,4 @@
-package model;
+package medicationApp.model;
 
 import java.util.Date;
 

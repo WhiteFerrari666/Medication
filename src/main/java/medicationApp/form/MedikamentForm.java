@@ -1,4 +1,4 @@
-package form;
+package medicationApp.form;
 
 public class MedikamentForm {
 	private String name;
