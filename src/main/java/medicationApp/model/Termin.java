@@ -1,14 +1,41 @@
-package medicationApp.form;
+package medicationApp.model;
 
 import java.util.Date;
 
-public class TerminForm {
+import javax.persistence.*;
 
+@Entity
+@Table(name = "termin")
+public class Termin {
+
+	@Id
+	@GeneratedValue
+	@Column(name = "id", nullable = false)
+	private Long id;
 	private String uhrzeitBezeichnung;
 	private Date datum;
 	private String webLink;
 	private boolean dringend;
 	private String anmerkungen;
+
+	public Termin() {
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public Termin(String uhrzeitBezeichnung, Date datum, String webLink, boolean dringend, String anmerkungen) {
+		this.uhrzeitBezeichnung = uhrzeitBezeichnung;
+		this.datum = datum;
+		this.webLink = webLink;
+		this.dringend = dringend;
+		this.anmerkungen = anmerkungen;
+	}
 
 	public String getUhrzeitBezeichnung() {
 		return uhrzeitBezeichnung;

@@ -1,0 +1,94 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Termin hinzufügen</title>
+    <link rel="stylesheet" href="css/bootstrap.minNeu.css">
+
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+</head>
+<body>
+<div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+        <h1>Termin anlegen</h1>
+    </div>
+    <div class="col-md-4"></div>
+</div>
+
+<form th:action="@{/addTermin}"
+      th:object="${terminForm}" method="POST">
+
+    <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-1">
+            Uhrzeit und Bezeichnung:
+        </div>
+        <div class="col-md-6">
+            <input type="text" th:field="*{uhrzeitBezeichnung}"/>
+        </div>
+    </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-1">
+            Datum:
+        </div>
+        <div class="col-md-6">
+            <input type="date" th:field="*{datum}"/>
+        </div>
+    </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-1">
+            Website:
+        </div>
+        <div class="col-md-6">
+            <input type="text" th:field="*{webLink}"/>
+        </div>
+    </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-1">
+            Ist der Termin dringend?
+        </div>
+        <div class="col-md-6">
+            <input type="checkbox" th:field="*{dringend}"/>
+        </div>
+    </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-1">
+            Anmerkungen:
+        </div>
+        <div class="col-md-6">
+            <input type="text" th:field="*{anmerkungen}"/>
+        </div>
+    </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6"></div>
+        <div class="col-md-3">
+            <br></br>
+            <input type="submit" value="hinzufügen"/>
+        </div>
+    </div>
+</form>
+
+</form>
+<!-- Check if errorMessage is not null and not empty -->
+
+<div th:if="${errorMessage}" th:utext="${errorMessage}"
+     style="color:#4fdbff;font-style:italic;">
+    ...
+</div>
+
+</body>
+</html>
