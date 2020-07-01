@@ -13,12 +13,14 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import medicationApp.dao.ErinnerungenDao;
+import medicationApp.dao.TerminDao;
 import medicationApp.form.ErinnerungForm;
 import medicationApp.form.MedikamentForm;
 import medicationApp.form.TerminForm;
 import medicationApp.model.Erinnerung;
 import medicationApp.model.Medikament;
 import medicationApp.model.Termin;
+import medicationApp.service.KalenderPopulationService;
 
 @Controller
 public class MainController {
@@ -26,8 +28,13 @@ public class MainController {
 	@Autowired
 	private ErinnerungenDao erinnerungenDao;
 
+	@Autowired
+	private TerminDao terminDao;
+
+	@Autowired
+	private KalenderPopulationService kalenderPopulationService;
+
 	private static List<Medikament> medikamente = new ArrayList<Medikament>();
-	private static List<Termin> termine = new ArrayList<Termin>();
 	private static List<Erinnerung> erinnerungen = new ArrayList<Erinnerung>();
 
 	static Date dt = new Date();
@@ -37,6 +44,8 @@ public class MainController {
 
 		erinnerungen.add(new Erinnerung("Antibiotika", 4, true, true, false, true, false, true, false, true, dt, dt));
 	}
+
+
 
 	// Aus Application.properties ziehen.
 	@Value("${welcome.message}")
@@ -152,7 +161,7 @@ public class MainController {
 	// Kalender
 	@GetMapping(value = {"/kalender"})
 	public String kalender(Model model) {
-		// model.addAttribute("termine", termine);
+		kalenderPopulationService.parseAllToJson();
 
 		return "kalender";
 	}
@@ -177,7 +186,7 @@ public class MainController {
 
 		if (uhrzeitBezeichnung != null && uhrzeitBezeichnung.length() > 0 && datum != null) {
 			Termin termin = new Termin(uhrzeitBezeichnung, datum, weblink, dringend, anmerkungen);
-			termine.add(termin);
+			terminDao.saveAndFlush(termin);
 			return "redirect:/kalender";
 		}
 

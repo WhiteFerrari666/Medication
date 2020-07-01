@@ -2,9 +2,12 @@ package medicationApp.form;
 
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 public class TerminForm {
 
 	private String uhrzeitBezeichnung;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date datum;
 	private String webLink;
 	private boolean dringend;

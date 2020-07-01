@@ -4,6 +4,8 @@ import java.util.Date;
 
 import javax.persistence.*;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 @Entity
 @Table(name = "termin")
 public class Termin {
@@ -12,10 +14,21 @@ public class Termin {
 	@GeneratedValue
 	@Column(name = "id", nullable = false)
 	private Long id;
+
+	@Column(name = "uhrzeit_bezeichnung", nullable = false)
 	private String uhrzeitBezeichnung;
+
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@Column(name = "datum", nullable = false)
 	private Date datum;
+
+	@Column(name = "weblink")
 	private String webLink;
+
+	@Column(name = "dringend")
 	private boolean dringend;
+
+	@Column(name = "anmerkungen")
 	private String anmerkungen;
 
 	public Termin() {
@@ -35,7 +48,9 @@ public class Termin {
 		this.webLink = webLink;
 		this.dringend = dringend;
 		this.anmerkungen = anmerkungen;
+
 	}
+
 
 	public String getUhrzeitBezeichnung() {
 		return uhrzeitBezeichnung;
