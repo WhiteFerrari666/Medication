@@ -31,33 +31,37 @@
         </ul>
     </div>
 </nav>
-<div class="row">
-    <div class="col-md-4"></div>
-    <div class="col-md-4">
-        <h1>Meine Erinnerungen</h1>
+<div class="container">
+    <div class="row">
+        <div style="width:100%; text-align:center">
+            <h1>Meine Erinnerungen</h1>
+        </div>
     </div>
-    <div class="col-md-4"></div>
 </div>
+<div class="container">
     <div class="col-md-7"><h2>Erinnerungen</h2>
         <p></p>
         <a href="addErinnerung">Füge eine Erinnerung hinzu</a>
         <p></p>
+    </div>
+    <div class="container">
         <table border="1">
             <tr>
-                <th>Name</th>
-                <th>Dosis</th>
-                <th>Aktiv</th>
-                <th>Montag</th>
-                <th>Dienstag</th>
-                <th>Mittwoch</th>
-                <th>Donnerstag</th>
-                <th>Freitag</th>
-                <th>Samstag</th>
-                <th>Sonntag</th>
-                <th>Anfangsdatum</th>
-                <th>Enddatum</th>
-            </tr>
-            <tr th:each="erinnerung : ${erinnerungen}">
+                <th scope="col">ID</th>
+                <th scope="col">Name</th>
+                <th scope="col">Dosis</th>
+                <th scope="col">Aktiv</th>
+                <th scope="col">Montag</th>
+                <th scope="col">Dienstag</th>
+                <th scope="col">Mittwoch</th>
+                <th scope="col">Donnerstag</th>
+                <th scope="col">Freitag</th>
+                <th scope="col">Samstag</th>
+                <th scope="col">Sonntag</th>
+                <th scope="col">Anfangsdatum</th>
+                <th scope="col">Enddatum</th>
+            <tr th:each="erinnerung : ${erinnerung}">
+                <th scope="row">1</th>
                 <td th:utext="${erinnerung.bezeichnung}">...</td>
                 <td th:utext="${erinnerung.dosis}">...</td>
                 <td th:utext="${erinnerung.aktiv}">...</td>
@@ -73,10 +77,6 @@
             </tr>
         </table>
     </div>
-    <div class="col-md-3">
-        <br></br>
-    </div>
 </div>
-
 </body>
 </html>

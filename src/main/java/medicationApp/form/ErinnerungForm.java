@@ -1,5 +1,7 @@
 package medicationApp.form;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 
 public class ErinnerungForm {
@@ -13,7 +15,9 @@ public class ErinnerungForm {
     private boolean freitag;
     private boolean samstag;
     private boolean sonntag;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date anfangsdatum;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date enddatum;
 
     public String getBezeichnung() {

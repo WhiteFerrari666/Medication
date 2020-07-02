@@ -4,146 +4,140 @@
     <meta charset="UTF-8"/>
     <title>Erinnerung hinzufügen</title>
     <link rel="stylesheet" href="css/bootstrap.minNeu.css">
-
+    <link rel="stylesheet" type="text/css" th:href="@{/css/navbar.css}"/>
     <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
 </head>
 <body>
-<div class="row">
-    <div class="col-md-4"></div>
-    <div class="col-md-4">
-        <h1>Erinnerung anlegen</h1>
+
+<nav class="navbar navbar-expand-lg" style="background-color: #161528;">
+    <a class="navbar-brand" th:href="@{/index}">MedicationApp</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/meinTag}">Mein Tag</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/medikamentenListe}">Meine Medikamente</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/erinnerungenListe}">Meine Erinnerungen</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/kalender}">Mein Kalender</a>
+        </ul>
     </div>
-    <div class="col-md-4"></div>
-</div>
-<br></br>
+</nav>
 <form th:action="@{/addErinnerung}"
       th:object="${erinnerungForm}" method="POST">
+    <div class="container">
+        <div class="row">
+            <div style="width:100%; text-align:center">
+                <h1>Erinnerung anlegen</h1>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <div class="container">
+        <div class="form-group row">
+            <label for="inputBezeichnung" class="col-sm-2 col-form-label">Bezeichnung</label>
+            <div class="col-md-6">
+                <input type="text" th:field="*{bezeichnung}" class="form-control" id="inputBezeichnung"
+                       placeholder="Bitte eintragen!">
+            </div>
+        </div>
 
-    <div class="row">
-        <div class="col-md-4"></div>
-        <div class="col-md-1">
-            Bezeichnung:
-            <!--    eigentlich kommt die vom Medikament-->
+        <div class="form-group row">
+            <label for="inputDosis" class="col-sm-2 col-form-label">Dosis</label>
+            <div class="col-md-6">
+                <input type="text" th:field="*{dosis}" class="form-control" id="inputDosis">
+            </div>
         </div>
-        <div class="col-md-6">
-            <input type="text" th:field="*{bezeichnung}"/>
-        </div>
-    </div>
-    </div>
-    <div class="row">
-        <div class="col-md-4"></div>
-        <div class="col-md-1">
-            Dosis:
-        </div>
-        <div class="col-md-6">
-            <input type="text" th:field="*{dosis}"/>
-        </div>
-    </div>
-    </div>
 
-    <div class="row">
-        <div class="col-md-4"></div>
-        <div class="col-md-1">
-            Aktiv:
+        <div class="form-group row">
+            <label for="inputAktiv" class="col-sm-2 col-form-label">Aktiv</label>
+            <div class="col-md-6">
+                <input type="checkbox" th:field="*{aktiv}" class="form-control" id="inputAktiv">
+            </div>
         </div>
-        <div class="col-md-6">
-            <input type="text" th:field="*{aktiv}"/>
-        </div>
-    </div>
-    </div>
 
-    <div class="row">
-        <div class="col-md-4"></div>
-        <div class="col-md-1">
-            Montag:
+        <div class="form-group row">
+            <label for="inputMontag" class="col-sm-2 col-form-label">Montag</label>
+            <div class="col-md-6">
+                <input type="checkbox" th:field="*{montag}" class="form-control" id="inputMontag">
+            </div>
         </div>
-        <div class="col-md-6">
-            <input type="text" th:field="*{montag}"/>
-        </div>
-    </div>
-    </div>
 
-    <div class="row">
-        <div class="col-md-4"></div>
-        <div class="col-md-1">
-            Dienstag:
+        <div class="form-group row">
+            <label for="inputDienstag" class="col-sm-2 col-form-label">Dienstag</label>
+            <div class="col-md-6">
+                <input type="checkbox" th:field="*{dienstag}" class="form-control" id="inputDienstag">
+            </div>
         </div>
-        <div class="col-md-6">
-            <input type="text" th:field="*{dienstag}"/>
-        </div>
-    </div>
-    </div>
 
-    <div class="row">
-        <div class="col-md-4"></div>
-        <div class="col-md-1">
-            Mittwoch:
+        <div class="form-group row">
+            <label for="inputMittwoch" class="col-sm-2 col-form-label">Mittwoch</label>
+            <div class="col-md-6">
+                <input type="checkbox" th:field="*{mittwoch}" class="form-control" id="inputMittwoch">
+            </div>
         </div>
-        <div class="col-md-6">
-            <input type="text" th:field="*{mittwoch}"/>
-        </div>
-    </div>
-    </div>
 
-    <div class="row">
-        <div class="col-md-4"></div>
-        <div class="col-md-1">
-            Donnerstag:
+        <div class="form-group row">
+            <label for="inputDonnerstag" class="col-sm-2 col-form-label">Donnerstag</label>
+            <div class="col-md-6">
+                <input type="checkbox" th:field="*{donnerstag}" class="form-control" id="inputDonnerstag">
+            </div>
         </div>
-        <div class="col-md-6">
-            <input type="text" th:field="*{donnerstag}"/>
-        </div>
-    </div>
-    </div>
 
-    <div class="row">
-        <div class="col-md-4"></div>
-        <div class="col-md-1">
-            Freitag:
+        <div class="form-group row">
+            <label for="inputFreitag" class="col-sm-2 col-form-label">Freitag</label>
+            <div class="col-md-6">
+                <input type="checkbox" th:field="*{freitag}" class="form-control" id="inputFreitag">
+            </div>
         </div>
-        <div class="col-md-6">
-            <input type="text" th:field="*{freitag}"/>
-        </div>
-    </div>
-    </div>
 
-    <div class="row">
-        <div class="col-md-4"></div>
-        <div class="col-md-1">
-            Samstag:
+        <div class="form-group row">
+            <label for="inputSamstag" class="col-sm-2 col-form-label">Samstag</label>
+            <div class="col-md-6">
+                <input type="checkbox" th:field="*{samstag}" class="form-control" id="inputSamstag">
+            </div>
         </div>
-        <div class="col-md-6">
-            <input type="text" th:field="*{samstag}"/>
-        </div>
-    </div>
-    </div>
 
-    <div class="row">
-        <div class="col-md-4"></div>
-        <div class="col-md-1">
-            Sonntag:
+        <div class="form-group row">
+            <label for="inputSonntag" class="col-sm-2 col-form-label">Sonntag</label>
+            <div class="col-md-6">
+                <input type="checkbox" th:field="*{sonntag}" class="form-control" id="inputSonntag">
+            </div>
         </div>
-        <div class="col-md-6">
-            <input type="text" th:field="*{sonntag}"/>
-        </div>
-    </div>
-    </div>
 
+        <div class="form-group row">
+            <label for="inputAnfangsdatum" class="col-sm-2 col-form-label">Anfangsdatum</label>
+            <div class="col-md-6">
+                <input type="date" th:field="*{anfangsdatum}" class="form-control" id="inputAnfangsdatum">
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label for="inputEnddatum" class="col-sm-2 col-form-label">Enddatum</label>
+            <div class="col-md-6">
+                <input type="date" th:field="*{enddatum}" class="form-control" id="inputEnddatum">
+            </div>
+        </div>
+    </div>
     <div class="row">
-        <div class="col-md-6"></div>
-        <div class="col-md-3">
-            <br></br>
-            <input type="submit" value="hinzufügen"/>
+        <div style="width:100%; text-align:center">
+            <input type="submit" class="btn btn-info" value="hinzufügen"/>
+            <!-- Check if errorMessage is not null and not empty -->
+            <div th:if="${errorMessage}" th:utext="${errorMessage}"
+                 style="color:#4fdbff;font-style:italic;">
+                ...
+            </div>
         </div>
     </div>
 </form>
-
-<!-- Check if errorMessage is not null and not empty -->
-
-<div th:if="${errorMessage}" th:utext="${errorMessage}"
-     style="color:#4fdbff;font-style:italic;">
-    ...
-</div>
-
 </body>
 </html>

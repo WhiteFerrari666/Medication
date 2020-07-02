@@ -1,5 +1,7 @@
 package medicationApp.model;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -11,17 +13,43 @@ public class Erinnerung {
     @GeneratedValue
     @Column(name = "id", nullable = false)
     private Long id;
+
+    @Column(name = "bezeichnung", nullable = false)
     private String bezeichnung;
+
+    @Column(name = "dosis", nullable = true)
     private int dosis;
+
+    @Column(name = "aktiv", nullable = false)
     private boolean aktiv;
+
+    @Column(name = "montag", nullable = true)
     private boolean montag;
+
+    @Column(name = "dienstag", nullable = true)
     private boolean dienstag;
+
+    @Column(name = "mittwoch", nullable = true)
     private boolean mittwoch;
+
+    @Column(name = "donnerstag", nullable = true)
     private boolean donnerstag;
+
+    @Column(name = "freitag", nullable = true)
     private boolean freitag;
+
+    @Column(name = "samstag", nullable = true)
     private boolean samstag;
+
+    @Column(name = "sonntag", nullable = true)
     private boolean sonntag;
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Column(name = "anfangsdatum", nullable = false)
     private Date anfangsdatum;
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Column(name = "enddatum", nullable = true)
     private Date enddatum;
 
     public Erinnerung() {
@@ -46,7 +74,7 @@ public class Erinnerung {
     public Long getId() {
         return id;
     }
-    public void setId(Long id) {
+    public void setId(Long ID) {
         this.id = id;
     }
 
