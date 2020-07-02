@@ -47,7 +47,6 @@
     <div class="container">
         <table border="1">
             <tr>
-                <th scope="col">ID</th>
                 <th scope="col">Name</th>
                 <th scope="col">Dosis</th>
                 <th scope="col">Aktiv</th>
@@ -61,7 +60,6 @@
                 <th scope="col">Anfangsdatum</th>
                 <th scope="col">Enddatum</th>
             <tr th:each="erinnerung : ${erinnerung}">
-                <th scope="row">1</th>
                 <td th:utext="${erinnerung.bezeichnung}">...</td>
                 <td th:utext="${erinnerung.dosis}">...</td>
                 <td th:utext="${erinnerung.aktiv}">...</td>
