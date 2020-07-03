@@ -1,5 +1,6 @@
 package medicationApp.controller;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -20,8 +21,7 @@ import medicationApp.form.TerminForm;
 import medicationApp.model.Erinnerung;
 import medicationApp.model.Medikament;
 import medicationApp.model.Termin;
-
-import javax.swing.*;
+import medicationApp.service.KalenderPopulationService;
 //import medicationApp.service.KalenderPopulationService;
 
 @Controller
@@ -33,8 +33,9 @@ public class MainController {
     @Autowired
     private TerminDao terminDao;
 
-//	@Autowired
-//	private KalenderPopulationService kalenderPopulationService;
+
+	@Autowired
+	private KalenderPopulationService kalenderPopulationService;
 
     private static List<Medikament> medikamente = new ArrayList<Medikament>();
 
@@ -155,8 +156,8 @@ public class MainController {
 
     // Kalender
     @GetMapping(value = {"/kalender"})
-    public String kalender(Model model) {
-//		kalenderPopulationService.parseAllToJson();
+    public String kalender(Model model) throws IOException {
+		kalenderPopulationService.parseAllToJson();
 
         return "kalender";
     }
