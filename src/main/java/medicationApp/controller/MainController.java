@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import medicationApp.dao.MedikamentDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -33,16 +34,21 @@ public class MainController {
     @Autowired
     private TerminDao terminDao;
 
+    @Autowired
+    private MedikamentDao medikamentDao;
+
+
 //	@Autowired
 //	private KalenderPopulationService kalenderPopulationService;
 
     private static List<Medikament> medikamente = new ArrayList<Medikament>();
+    private static List<Erinnerung> erinnerungen = new ArrayList<Erinnerung>();
 
     static Date dt = new Date();
 
     static {
-        medikamente.add(new Medikament("Antibiotika", 1));
-        medikamente.add(new Medikament("Ibuprofen", 3));
+
+        erinnerungen.add(new Erinnerung("Antibiotika", 4, true, true, false, true, false, true, false, true, dt, dt));
     }
 
 
@@ -72,8 +78,9 @@ public class MainController {
     @GetMapping(value = {"/medikamentenListe"})
     public String medikamentenListe(Model model) {
 
-        model.addAttribute("medikamente", medikamente);
-
+        final List<Medikament> medikamentenListe = (List<Medikament>)
+                medikamentDao.findAll();
+        model.addAttribute("medikament", medikamentenListe);
         return "medikamentenListe";
     }
 
@@ -86,34 +93,41 @@ public class MainController {
         return "addMedikament";
     }
 
+
     @PostMapping(value = {"/addMedikament"})
     public String saveMedikament(Model model, //
                                  @ModelAttribute("medikamentForm") MedikamentForm medikamentForm) {
 
         String name = medikamentForm.getName();
-        int dosis = medikamentForm.getDosis();
+        long dosis = medikamentForm.getDosis();
 
         if (name != null && name.length() > 0 //
                 && dosis != 0) {
-            Medikament newMedikament = new Medikament(name, dosis);
-            medikamente.add(newMedikament);
-
+            Medikament medikament = new Medikament(name, dosis);
+            medikamentDao.saveAndFlush(medikament);
             return "redirect:/medikamentenListe";
         }
 
         model.addAttribute("errorMessage", errorMessage);
         return "addMedikament";
     }
-
+//Mein Tag
     @GetMapping(value = {"/meinTag"})
-    public void meinTag(Model model) {
+    public String meinTag(Model model) {
+        final List<Erinnerung> erinnerungenListe = (List<Erinnerung>) erinnerungenDao.findAll();
+        model.addAttribute("erinnerung", erinnerungenListe);
+        return "meinTag";
     }
 
+//Erinnerung
     @GetMapping(value = {"/erinnerungenListe"})
     public String erinnerungenListe(Model model) {
 
         final List<Erinnerung> erinnerungenListe = (List<Erinnerung>) erinnerungenDao.findAll();
         model.addAttribute("erinnerung", erinnerungenListe);
+
+        TerminForm terminForm = new TerminForm();
+        model.addAttribute("terminForm", terminForm);
         return "erinnerungenListe";
     }
 

@@ -1,33 +1,56 @@
 package medicationApp.model;
 
+
+import javax.persistence.*;
+
+@Entity
+@Table(name = "medikamente")
+
 public class Medikament {
 
-	private String name;
-	private int dosis;
-	// private String beipackzettelHyperlink;
 
-	public Medikament() {
+    @Id
+    @GeneratedValue
+    @Column(name = "id", nullable = false)
+    private Long id;
 
-	}
+    @Column(name = "name", nullable = false)
+    private String name;
 
-	public Medikament(String name, int dosis) {
-		this.name = name;
-		this.dosis = dosis;
-	}
+    @Column(name = "dosis", nullable = false)
+    private Long dosis;
 
-	public String getName() {
-		return name;
-	}
+    public Medikament() {
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    }
 
-	public int getDosis() {
-		return dosis;
-	}
+    public Medikament(String name, Long dosis) {
 
-	public void setDosis(int dosis) {
-		this.dosis = dosis;
-	}
+        this.name = name;
+        this.dosis = dosis;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Long getDosis() {
+        return dosis;
+    }
+
+    public void setDosis(Long dosis) {
+        this.dosis = dosis;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 }

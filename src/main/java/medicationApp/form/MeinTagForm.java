@@ -1,19 +1,9 @@
 package medicationApp.form;
 
+import medicationApp.model.Erinnerung;
 import medicationApp.model.Medikament;
 
 public class MeinTagForm {
-
-    private int datum;
-    private Medikament medikament;
-
-    public int getDatum() {
-        return datum;
-    }
-
-    public void setDatum(int datum) {
-        this.datum = datum;
-    }
 
     public Medikament getMedikament() {
         return medikament;
@@ -22,4 +12,18 @@ public class MeinTagForm {
     public void setMedikament(Medikament medikament) {
         this.medikament = medikament;
     }
+
+    public Erinnerung getErinnerung() {
+        return erinnerung;
+    }
+
+    public void setErinnerung(Erinnerung erinnerung) {
+        this.erinnerung = erinnerung;
+    }
+
+    Medikament medikament;
+    Erinnerung erinnerung;
+
+
+
 }

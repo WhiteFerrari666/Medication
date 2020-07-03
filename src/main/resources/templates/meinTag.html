@@ -51,36 +51,62 @@
 </div>
 
 <br>
-<div class="card-group" style="width: 50rem;">
-    <div class="card" style="width: 18rem;">
+
+<div class="card-group" style="width: 80rem;">
+    <div class="card" >
         <div class="card-body">
-            <h5 class="card-title">Einzunehmende Medikamente</h5>
+            <h5 class="card-title">Heutige Erinnerung</h5>
             <br>
             <p class="card-text">
-            <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                    <div class="input-group-text">
-                        <input type="checkbox" aria-label="Checkbox for following text input">
-                    </div>
-                </div>
-                <input type="text" class="form-control" aria-label="Text input with checkbox">
-            </div>
+            <table class="table" style="width: 20rem;">
+                <thead class="thead-light">
+                <tr>
+                    <th scope="col">Bezeichnung</th>
+                    <th scope="col">Dosis</th>
+                    <th scope="col"></th>
+
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="erinnerung : ${erinnerung}">
+                    <td th:utext="${erinnerung.bezeichnung}">...</td>
+                    <td th:utext="${erinnerung.dosis}">...</td>
+                    <td>  <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                                <input type="checkbox" aria-label="Checkbox for following text input">
+                        </div>
+                    </div></td>
+                </tr>
+                </tbody>
+            </table>
             </p>
         </div>
     </div>
-    <div class="card" style="width: 18rem;">
+
+    <div class="card" >
         <div class="card-body">
-            <h5 class="card-title">Heute zu erledigen</h5>
+            <h5 class="card-title">Heutige Termine</h5>
             <br>
             <p class="card-text">
-            <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                    <div class="input-group-text">
-                        <input type="checkbox" aria-label="Checkbox for following text input">
-                    </div>
-                </div>
-                <input type="text" class="form-control" aria-label="Text input with checkbox">
-            </div>
+            <table class="table" style="width: 20rem;">
+                <thead class="thead-light">
+                <tr>
+                    <th scope="col">Uhrzeit und Bezeichnung</th>
+                    <th scope="col"></th>
+
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="termin : ${termin}">
+                    <td th:utext="${termin.uhrzeitBezeichnung}">...</td>
+                    <td>  <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <input type="checkbox" aria-label="Checkbox for following text input">
+                        </div>
+                    </div></td>
+                </tr>
+                </tbody>
+            </table>
             </p>
         </div>
     </div>

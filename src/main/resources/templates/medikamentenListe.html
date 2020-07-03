@@ -11,8 +11,9 @@
 <body>
 
 <nav class="navbar navbar-expand-lg" style="background-color: #161528;">
-    <a class="navbar-brand"th:href="@{/index}">MedicationApp</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <a class="navbar-brand" th:href="@{/index}">MedicationApp</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
 
@@ -33,20 +34,31 @@
 
     </div>
 </nav>
-<h1>Medikamenten-Liste</h1>
-<a href="addMedikament">Füge Medikament hinzu</a>
-<br/><br/>
+<br>
+<div class="row">
+    <div style="width: 100%; text-align: center">
+        <h1>Meine Medikamente</h1>
+    </div>
+</div>
+<br>
 <div>
-    <table border="1">
+    <table class="table" style="width: 40rem; margin: 0 auto;">
+        <thead class="thead-light">
         <tr>
-            <th>Name</th>
-            <th>Dosis</th>
+            <th scope="col">Name</th>
+            <th scope="col">Dosis</th>
         </tr>
-        <tr th:each="medikament : ${medikamente}">
+        </thead>
+        <tbody>
+        <tr th:each="medikament : ${medikament}">
             <td th:utext="${medikament.name}">...</td>
             <td th:utext="${medikament.dosis}">...</td>
         </tr>
+
+        </tbody>
     </table>
+    <a class="btn btn-light btn-sm" href="addMedikament" role="button" style="margin-left: 68rem;" >Medikament hinzufügen</a>
+    </div>
 </div>
 </body>
 </html>
