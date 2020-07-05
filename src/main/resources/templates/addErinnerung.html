@@ -33,106 +33,114 @@
     </div>
 </nav>
 <br>
+<div class="container">
+    <div class="row">
+        <div style="width:100%; text-align:center">
+            <h1>Erinnerung anlegen</h1>
+        </div>
+    </div>
+</div>
+<br/>
 <form th:action="@{/addErinnerung}"
       th:object="${erinnerungForm}" method="POST">
     <div class="container">
-        <div class="row">
-            <div style="width:100%; text-align:center">
-                <h1>Erinnerung anlegen</h1>
+        <div style="width:80rem; margin: 0 auto;">
+            <div class="form-group row">
+                <label for="inputBezeichnung" class="col-sm-2 col-form-label">Bezeichnung</label>
+                <div class="col-md-6">
+                    <input type="text" th:field="*{bezeichnung}" class="form-control" id="inputBezeichnung"
+                           placeholder="Bitte eine Bezeichnung eintragen">
+                </div>
             </div>
-        </div>
-    </div>
-    <br/>
-    <div class="container">
-        <div class="form-group row">
-            <label for="inputBezeichnung" class="col-sm-2 col-form-label">Bezeichnung</label>
-            <div class="col-md-6">
-                <input type="text" th:field="*{bezeichnung}" class="form-control" id="inputBezeichnung"
-                       placeholder="Bitte eintragen!">
+            <div class="form-group row">
+                <label for="inputMedikament" class="col-sm-2 col-form-label">Medikament</label>
+                <div class="col-md-6">
+                    <input type="text" th:field="*{medikament}" class="form-control" id="inputMedikament"
+                           placeholder="Bitte ein Medikament eintragen">
+                </div>
             </div>
-        </div>
+            <div class="form-group row">
+                <label for="inputDosis" class="col-sm-2 col-form-label">Dosis</label>
+                <div class="col-md-6">
+                    <input type="number" th:field="*{dosis}" class="form-control" id="inputDosis">
+                </div>
+            </div>
 
-        <div class="form-group row">
-            <label for="inputDosis" class="col-sm-2 col-form-label">Dosis</label>
-            <div class="col-md-6">
-                <input type="text" th:field="*{dosis}" class="form-control" id="inputDosis">
+            <div class="form-group row">
+                <label for="inputAktiv" class="col-sm-2 col-form-label">Aktiv</label>
+                <div class="col-md-6">
+                    <input type="checkbox" th:field="*{aktiv}" class="form-control" id="inputAktiv">
+                </div>
             </div>
-        </div>
 
-        <div class="form-group row">
-            <label for="inputAktiv" class="col-sm-2 col-form-label">Aktiv</label>
-            <div class="col-md-6">
-                <input type="checkbox" th:field="*{aktiv}" class="form-control" id="inputAktiv">
+            <div class="form-group row">
+                <label for="inputMontag" class="col-sm-2 col-form-label">Montag</label>
+                <div class="col-md-6">
+                    <input type="checkbox" th:field="*{montag}" class="form-control" id="inputMontag">
+                </div>
             </div>
-        </div>
 
-        <div class="form-group row">
-            <label for="inputMontag" class="col-sm-2 col-form-label">Montag</label>
-            <div class="col-md-6">
-                <input type="checkbox" th:field="*{montag}" class="form-control" id="inputMontag">
+            <div class="form-group row">
+                <label for="inputDienstag" class="col-sm-2 col-form-label">Dienstag</label>
+                <div class="col-md-6">
+                    <input type="checkbox" th:field="*{dienstag}" class="form-control" id="inputDienstag">
+                </div>
             </div>
-        </div>
 
-        <div class="form-group row">
-            <label for="inputDienstag" class="col-sm-2 col-form-label">Dienstag</label>
-            <div class="col-md-6">
-                <input type="checkbox" th:field="*{dienstag}" class="form-control" id="inputDienstag">
+            <div class="form-group row">
+                <label for="inputMittwoch" class="col-sm-2 col-form-label">Mittwoch</label>
+                <div class="col-md-6">
+                    <input type="checkbox" th:field="*{mittwoch}" class="form-control" id="inputMittwoch">
+                </div>
             </div>
-        </div>
 
-        <div class="form-group row">
-            <label for="inputMittwoch" class="col-sm-2 col-form-label">Mittwoch</label>
-            <div class="col-md-6">
-                <input type="checkbox" th:field="*{mittwoch}" class="form-control" id="inputMittwoch">
+            <div class="form-group row">
+                <label for="inputDonnerstag" class="col-sm-2 col-form-label">Donnerstag</label>
+                <div class="col-md-6">
+                    <input type="checkbox" th:field="*{donnerstag}" class="form-control" id="inputDonnerstag">
+                </div>
             </div>
-        </div>
 
-        <div class="form-group row">
-            <label for="inputDonnerstag" class="col-sm-2 col-form-label">Donnerstag</label>
-            <div class="col-md-6">
-                <input type="checkbox" th:field="*{donnerstag}" class="form-control" id="inputDonnerstag">
+            <div class="form-group row">
+                <label for="inputFreitag" class="col-sm-2 col-form-label">Freitag</label>
+                <div class="col-md-6">
+                    <input type="checkbox" th:field="*{freitag}" class="form-control" id="inputFreitag">
+                </div>
             </div>
-        </div>
 
-        <div class="form-group row">
-            <label for="inputFreitag" class="col-sm-2 col-form-label">Freitag</label>
-            <div class="col-md-6">
-                <input type="checkbox" th:field="*{freitag}" class="form-control" id="inputFreitag">
+            <div class="form-group row">
+                <label for="inputSamstag" class="col-sm-2 col-form-label">Samstag</label>
+                <div class="col-md-6">
+                    <input type="checkbox" th:field="*{samstag}" class="form-control" id="inputSamstag">
+                </div>
             </div>
-        </div>
 
-        <div class="form-group row">
-            <label for="inputSamstag" class="col-sm-2 col-form-label">Samstag</label>
-            <div class="col-md-6">
-                <input type="checkbox" th:field="*{samstag}" class="form-control" id="inputSamstag">
+            <div class="form-group row">
+                <label for="inputSonntag" class="col-sm-2 col-form-label">Sonntag</label>
+                <div class="col-md-6">
+                    <input type="checkbox" th:field="*{sonntag}" class="form-control" id="inputSonntag">
+                </div>
             </div>
-        </div>
 
-        <div class="form-group row">
-            <label for="inputSonntag" class="col-sm-2 col-form-label">Sonntag</label>
-            <div class="col-md-6">
-                <input type="checkbox" th:field="*{sonntag}" class="form-control" id="inputSonntag">
+            <div class="form-group row">
+                <label for="inputAnfangsdatum" class="col-sm-2 col-form-label">Anfangsdatum</label>
+                <div class="col-md-6">
+                    <input type="date" th:field="*{anfangsdatum}" class="form-control" id="inputAnfangsdatum">
+                </div>
             </div>
-        </div>
 
-        <div class="form-group row">
-            <label for="inputAnfangsdatum" class="col-sm-2 col-form-label">Anfangsdatum</label>
-            <div class="col-md-6">
-                <input type="date" th:field="*{anfangsdatum}" class="form-control" id="inputAnfangsdatum">
-            </div>
-        </div>
-
-        <div class="form-group row">
-            <label for="inputEnddatum" class="col-sm-2 col-form-label">Enddatum</label>
-            <div class="col-md-6">
-                <input type="date" th:field="*{enddatum}" class="form-control" id="inputEnddatum">
+            <div class="form-group row">
+                <label for="inputEnddatum" class="col-sm-2 col-form-label">Enddatum</label>
+                <div class="col-md-6">
+                    <input type="date" th:field="*{enddatum}" class="form-control" id="inputEnddatum">
+                </div>
             </div>
         </div>
     </div>
     <div class="row">
         <div style="width:100%; text-align:center">
-            <a class="btn btn-danger" href="erinnerungenListe" role="button" >abbrechen</a>
-            <input type="submit" class="btn btn-info" value="hinzufügen"/>
+            <a class="btn" style="background-color:#48475a; color:#1edc82;" href="erinnerungenListe" role="button">abbrechen</a>
+            <input type="submit" style="background-color:#1edc82; color:#48475a;" class="btn" value="hinzufügen"/>
             <!-- Check if errorMessage is not null and not empty -->
             <div th:if="${errorMessage}" th:utext="${errorMessage}"
                  style="color:#4fdbff;font-style:italic;">

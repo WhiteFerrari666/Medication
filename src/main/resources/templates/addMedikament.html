@@ -38,32 +38,51 @@
         <h1>Medikament hinzufügen</h1>
     </div>
 </div>
-
 <br>
-<a class="btn btn-light btn-sm" href="medikamentenListe" role="button" style="margin-left: 10rem;" >zurück zur Ansicht</a>
+<!--<a class="btn btn-light btn-sm" href="medikamentenListe" role="button" style="margin-left: 10rem;" >zurück zur Ansicht</a>-->
 <form th:action="@{/addMedikament}"
       th:object="${medikamentForm}" method="POST">
-<div class="container">
-    <div class="form-group row">
-        <label for="inputBezeichnung" class="col-sm-2 col-form-label">Bezeichnung</label>
-        <div class="col-md-6">
-            <input type="text" th:field="*{name}" class="form-control" id="inputBezeichnung"
-                   placeholder="Bitte eintragen!">
+    <div class="container">
+        <div style="width:80rem; margin: 0 auto;">
+            <div class="form-group row">
+                <label for="inputBezeichnung" class="col-sm-2 col-form-label">Bezeichnung</label>
+                <div class="col-md-6">
+                    <input type="text" th:field="*{name}" class="form-control" id="inputBezeichnung"
+                           placeholder="Bitte eine Bezeichnung eintragen">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="inputForm" class="col-sm-2 col-form-label">Form</label>
+                <div class="col-md-6">
+                    <!--            <input type="text" th:field="*{form}" class="form-control" id="inputForm">-->
+
+                    <select class="form-control" th:field="*{form}" id="inputForm">
+                        <option value = "Tablette">Tablette</option>
+                        <option value = "Flüssigkeit">Flüssigkeit</option>
+                        <option value = "Pulver">Pulver</option>
+                    </select>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="inputDosis" class="col-sm-2 col-form-label">Dosis</label>
+                <div class="col-md-6">
+                    <input type="number" th:field="*{dosis}" class="form-control" id="inputDosis">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="inputRezeptpflichtig" class="col-sm-2 col-form-label">Rezeptpflichtig</label>
+                <div class="col-md-6">
+                    <input type="checkbox" th:field="*{rezeptpflichtig}" class="form-control" id="inputRezeptpflichtig">
+                </div>
+            </div>
         </div>
     </div>
-
-    <div class="form-group row">
-        <label for="inputDosis" class="col-sm-2 col-form-label">Dosis</label>
-        <div class="col-md-6">
-            <input type="text" th:field="*{dosis}" class="form-control" id="inputDosis">
-        </div>
-    </div>
-
-    </div>
-</div>
     <div class="row">
         <div style="width:100%; text-align:center">
-            <input type="submit" class=" btn btn-light btn-sm" style="margin-left: 10rem;" value="hinzufügen"/>
+            <a class="btn" style="background-color:#48475a; color:#1edc82;" href="medikamentenListe" role="button">abbrechen</a>
+            <input type="submit" style="background-color:#1edc82; color:#48475a;" class="btn" value="hinzufügen"/>
             <!-- Check if errorMessage is not null and not empty -->
             <div th:if="${errorMessage}" th:utext="${errorMessage}"
                  style="color:#4fdbff;font-style:italic;">

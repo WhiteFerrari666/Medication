@@ -41,16 +41,11 @@ public class MainController {
 //	@Autowired
 //	private KalenderPopulationService kalenderPopulationService;
 
-    private static List<Medikament> medikamente = new ArrayList<Medikament>();
-    private static List<Erinnerung> erinnerungen = new ArrayList<Erinnerung>();
-
     static Date dt = new Date();
 
     static {
 
-        erinnerungen.add(new Erinnerung("Antibiotika", 4, true, true, false, true, false, true, false, true, dt, dt));
     }
-
 
     // Aus Application.properties ziehen.
     @Value("${welcome.message}")
@@ -99,11 +94,12 @@ public class MainController {
                                  @ModelAttribute("medikamentForm") MedikamentForm medikamentForm) {
 
         String name = medikamentForm.getName();
-        long dosis = medikamentForm.getDosis();
+        String form = medikamentForm.getForm();
+        int dosis = medikamentForm.getDosis();
+        boolean rezeptpflichtig = medikamentForm.isRezeptpflichtig();
 
-        if (name != null && name.length() > 0 //
-                && dosis != 0) {
-            Medikament medikament = new Medikament(name, dosis);
+        if (name != null && name.length() > 0 && form != null && dosis != 0) {
+            Medikament medikament = new Medikament(name, form, dosis, rezeptpflichtig);
             medikamentDao.saveAndFlush(medikament);
             return "redirect:/medikamentenListe";
         }
@@ -126,8 +122,6 @@ public class MainController {
         final List<Erinnerung> erinnerungenListe = (List<Erinnerung>) erinnerungenDao.findAll();
         model.addAttribute("erinnerung", erinnerungenListe);
 
-        TerminForm terminForm = new TerminForm();
-        model.addAttribute("terminForm", terminForm);
         return "erinnerungenListe";
     }
 
@@ -145,6 +139,7 @@ public class MainController {
                                  @ModelAttribute("erinnerungForm") ErinnerungForm erinnerungForm) {
 
         String bezeichnung = erinnerungForm.getBezeichnung();
+        String medikament = erinnerungForm.getMedikament();
         int dosis = erinnerungForm.getDosis();
         boolean aktiv = erinnerungForm.isAktiv();
         boolean montag = erinnerungForm.isMontag();
@@ -158,13 +153,37 @@ public class MainController {
         Date enddatum = erinnerungForm.getEnddatum();
 
         if (bezeichnung != null && anfangsdatum != null) {
-            Erinnerung erinnerung = new Erinnerung(bezeichnung, dosis, aktiv, montag, dienstag, mittwoch, donnerstag, freitag, samstag, sonntag, anfangsdatum, enddatum);
+            Erinnerung erinnerung = new Erinnerung(bezeichnung, medikament, dosis, aktiv, montag, dienstag, mittwoch, donnerstag, freitag, samstag, sonntag, anfangsdatum, enddatum);
             erinnerungenDao.saveAndFlush(erinnerung);
             return "redirect:/erinnerungenListe";
         }
 
         model.addAttribute("errorMessage", errorMessage);
         return "addErinnerung";
+    }
+
+    @GetMapping(value = {"/deleteErinnerung"})
+    public String showDeleteErinnerung(Model model) {
+
+        ErinnerungForm erinnerungForm = new ErinnerungForm();
+        model.addAttribute("erinnerungForm", erinnerungForm);
+
+        final List<Erinnerung> erinnerungenListe = (List<Erinnerung>) erinnerungenDao.findAll();
+        model.addAttribute("erinnerung", erinnerungenListe);
+
+        return "deleteErinnerung";
+    }
+
+    @PostMapping(value = {"/deleteErinnerung"})
+    public String deleteErinnerung(Model model, @ModelAttribute("erinnerungForm") ErinnerungForm erinnerungForm) {
+        String bezeichnung = erinnerungForm.getBezeichnung();
+        if (bezeichnung != null) {
+            Erinnerung erinnerung = erinnerungenDao.getErinnerungByBezeichnung(bezeichnung);
+            erinnerungenDao.delete(erinnerung);
+            return "redirect:/erinnerungenListe";
+        }
+        model.addAttribute("errorMessage", errorMessage);
+        return "deleteErinnerung";
     }
 
     // Kalender

@@ -11,4 +11,5 @@ public interface ErinnerungenDao extends JpaRepository<Erinnerung, Long> {
 	Erinnerung findErinnerungByAktivFalse();
 	void countAllByBezeichnungEndingWith(String test);
 	Erinnerung getErinnerungByBezeichnungIsNotNull();
+	Erinnerung getErinnerungByBezeichnung(String bezeichnung);
 }

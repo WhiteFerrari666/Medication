@@ -6,6 +6,7 @@ import java.util.Date;
 
 public class ErinnerungForm {
     private String bezeichnung;
+    private String medikament;
     private int dosis;
     private boolean aktiv;
     private boolean montag;
@@ -26,6 +27,14 @@ public class ErinnerungForm {
 
     public void setBezeichnung(String bezeichnung) {
         this.bezeichnung = bezeichnung;
+    }
+
+    public String getMedikament() {
+        return medikament;
+    }
+
+    public void setMedikament(String medikament) {
+        this.medikament = medikament;
     }
 
     public int getDosis() {
