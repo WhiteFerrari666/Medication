@@ -1,11 +1,9 @@
 package medicationApp.controller;
 
-import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import medicationApp.dao.TerminDao;
-import medicationApp.form.TerminForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -16,8 +14,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import medicationApp.dao.ErinnerungenDao;
 import medicationApp.dao.MedikamentDao;
+import medicationApp.dao.TerminDao;
 import medicationApp.form.ErinnerungForm;
 import medicationApp.form.MedikamentForm;
+import medicationApp.form.TerminForm;
 import medicationApp.model.Erinnerung;
 import medicationApp.model.Medikament;
 import medicationApp.model.Termin;
@@ -110,6 +110,11 @@ public class MainController {
     public String meinTag(Model model) {
         final List<Erinnerung> erinnerungenListe = (List<Erinnerung>) erinnerungenDao.findAll();
         model.addAttribute("erinnerung", erinnerungenListe);
+
+        LocalDate date = LocalDate.now();
+        final List<Termin> terminListe = terminDao.findAllByDatumIs(date);
+        model.addAttribute("termin", terminListe);
+
         return "meinTag";
     }
 
@@ -205,7 +210,7 @@ public class MainController {
     public String saveTermin(Model model, @ModelAttribute("terminForm") TerminForm terminForm) {
 
         String uhrzeitBezeichnung = terminForm.getUhrzeitBezeichnung();
-        Date datum = terminForm.getDatum();
+        LocalDate datum = terminForm.getDatum();
         String weblink = terminForm.getWebLink();
         boolean dringend = terminForm.isDringend();
         String anmerkungen = terminForm.getAnmerkungen();

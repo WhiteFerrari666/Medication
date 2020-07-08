@@ -1,5 +1,6 @@
 package medicationApp.model;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 import javax.persistence.*;
@@ -20,7 +21,7 @@ public class Termin {
 
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@Column(name = "datum", nullable = false)
-	private Date datum;
+	private LocalDate datum;
 
 	@Column(name = "weblink")
 	private String webLink;
@@ -34,15 +35,7 @@ public class Termin {
 	public Termin() {
 	}
 
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public Termin(String uhrzeitBezeichnung, Date datum, String webLink, boolean dringend, String anmerkungen) {
+	public Termin(String uhrzeitBezeichnung, LocalDate datum, String webLink, boolean dringend, String anmerkungen) {
 		this.uhrzeitBezeichnung = uhrzeitBezeichnung;
 		this.datum = datum;
 		this.webLink = webLink;
@@ -51,6 +44,13 @@ public class Termin {
 
 	}
 
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
 
 	public String getUhrzeitBezeichnung() {
 		return uhrzeitBezeichnung;
@@ -60,11 +60,11 @@ public class Termin {
 		this.uhrzeitBezeichnung = uhrzeitBezeichnung;
 	}
 
-	public Date getDatum() {
+	public LocalDate getDatum() {
 		return datum;
 	}
 
-	public void setDatum(Date datum) {
+	public void setDatum(LocalDate datum) {
 		this.datum = datum;
 	}
 
