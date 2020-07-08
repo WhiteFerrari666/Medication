@@ -1,6 +1,7 @@
 package medicationApp.controller;
 
-import java.util.ArrayList;
+import java.io.IOException;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -26,202 +27,194 @@ import medicationApp.service.KalenderPopulationService;
 @Controller
 public class MainController {
 
-    @Autowired
-    private ErinnerungenDao erinnerungenDao;
+	@Autowired
+	private ErinnerungenDao erinnerungenDao;
 
-    @Autowired
-    private TerminDao terminDao;
+	@Autowired
+	private TerminDao terminDao;
 
-    @Autowired
-    private MedikamentDao medikamentDao;
-
+	@Autowired
+	private MedikamentDao medikamentDao;
 
 	@Autowired
 	private KalenderPopulationService kalenderPopulationService;
 
-    static Date dt = new Date();
+	static Date dt = new Date();
 
-    static {
+	static {
 
-    }
+	}
 
-    // Aus Application.properties ziehen.
-    @Value("${welcome.message}")
-    private String welcomeMessage;
+	// Aus Application.properties ziehen.
+	@Value("${welcome.message}")
+	private String welcomeMessage;
 
-    @Value("${error.message}")
-    private String errorMessage;
-    @Value("${medikament.error.message}")
-    private String errorMessageMedikament;
-    @Value("${termin.error.message}")
-    private String errorMessageTermin;
-    @Value("${erinnerung.error.message}")
-    private String errorMessageErinnerung;
+	@Value("${error.message}")
+	private String errorMessage;
+	@Value("${medikament.error.message}")
+	private String errorMessageMedikament;
+	@Value("${termin.error.message}")
+	private String errorMessageTermin;
+	@Value("${erinnerung.error.message}")
+	private String errorMessageErinnerung;
 
-    // Mappings
-    @GetMapping(value = {"/", "/index"})
-    public String index(Model model) {
+	// Mappings
+	@GetMapping(value = {"/", "/index"})
+	public String index(Model model) {
 
-        model.addAttribute("message", welcomeMessage);
+		model.addAttribute("message", welcomeMessage);
+		final List<Erinnerung> erinnerungenListe = (List<Erinnerung>) erinnerungenDao.findAll();
+		model.addAttribute("erinnerung", erinnerungenListe);
 
-        return "index";
-    }
+		LocalDate date = LocalDate.now();
+		final List<Termin> terminListe = terminDao.findAllByDatumIs(date);
+		model.addAttribute("termin", terminListe);
 
-    // Medikamente
-    @GetMapping(value = {"/medikamentenListe"})
-    public String medikamentenListe(Model model) {
+		return "index";
+	}
 
-        final List<Medikament> medikamentenListe = (List<Medikament>)
-                medikamentDao.findAll();
-        model.addAttribute("medikament", medikamentenListe);
-        return "medikamentenListe";
-    }
+	// Medikamente
+	@GetMapping(value = {"/medikamentenListe"})
+	public String medikamentenListe(Model model) {
 
-    @GetMapping(value = {"/addMedikament"})
-    public String showAddMedikament(Model model) {
+		final List<Medikament> medikamentenListe = (List<Medikament>) medikamentDao.findAll();
+		model.addAttribute("medikament", medikamentenListe);
+		return "medikamentenListe";
+	}
 
-        MedikamentForm medikamentForm = new MedikamentForm();
-        model.addAttribute("medikamentForm", medikamentForm);
+	@GetMapping(value = {"/addMedikament"})
+	public String showAddMedikament(Model model) {
 
-        return "addMedikament";
-    }
+		MedikamentForm medikamentForm = new MedikamentForm();
+		model.addAttribute("medikamentForm", medikamentForm);
 
+		return "addMedikament";
+	}
 
-    @PostMapping(value = {"/addMedikament"})
-    public String saveMedikament(Model model, //
-                                 @ModelAttribute("medikamentForm") MedikamentForm medikamentForm) {
+	@PostMapping(value = {"/addMedikament"})
+	public String saveMedikament(Model model, //
+			@ModelAttribute("medikamentForm") MedikamentForm medikamentForm) {
 
-        String name = medikamentForm.getName();
-        String form = medikamentForm.getForm();
-        int dosis = medikamentForm.getDosis();
-        boolean rezeptpflichtig = medikamentForm.isRezeptpflichtig();
+		String name = medikamentForm.getName();
+		String form = medikamentForm.getForm();
+		int dosis = medikamentForm.getDosis();
+		boolean rezeptpflichtig = medikamentForm.isRezeptpflichtig();
 
-        if (name != null && name.length() > 0 && form != null && dosis != 0) {
-            Medikament medikament = new Medikament(name, form, dosis, rezeptpflichtig);
-            medikamentDao.saveAndFlush(medikament);
-            return "redirect:/medikamentenListe";
-        }
+		if (name != null && name.length() > 0 && form != null && dosis != 0) {
+			Medikament medikament = new Medikament(name, form, dosis, rezeptpflichtig);
+			medikamentDao.saveAndFlush(medikament);
+			return "redirect:/medikamentenListe";
+		}
 
-        model.addAttribute("errorMessage", errorMessage);
-        return "addMedikament";
-    }
-//Mein Tag
-    @GetMapping(value = {"/meinTag"})
-    public String meinTag(Model model) {
-        final List<Erinnerung> erinnerungenListe = (List<Erinnerung>) erinnerungenDao.findAll();
-        model.addAttribute("erinnerung", erinnerungenListe);
+		model.addAttribute("errorMessage", errorMessage);
+		return "addMedikament";
+	}
 
-        LocalDate date = LocalDate.now();
-        final List<Termin> terminListe = terminDao.findAllByDatumIs(date);
-        model.addAttribute("termin", terminListe);
+	// Erinnerung
+	@GetMapping(value = {"/erinnerungenListe"})
+	public String erinnerungenListe(Model model) {
 
-        return "meinTag";
-    }
+		final List<Erinnerung> erinnerungenListe = (List<Erinnerung>) erinnerungenDao.findAll();
+		model.addAttribute("erinnerung", erinnerungenListe);
 
-//Erinnerung
-    @GetMapping(value = {"/erinnerungenListe"})
-    public String erinnerungenListe(Model model) {
+		return "erinnerungenListe";
+	}
 
-        final List<Erinnerung> erinnerungenListe = (List<Erinnerung>) erinnerungenDao.findAll();
-        model.addAttribute("erinnerung", erinnerungenListe);
+	@GetMapping(value = {"/addErinnerung"})
+	public String showAddErinnerung(Model model) {
 
-        return "erinnerungenListe";
-    }
+		ErinnerungForm erinnerungForm = new ErinnerungForm();
+		model.addAttribute("erinnerungForm", erinnerungForm);
 
-    @GetMapping(value = {"/addErinnerung"})
-    public String showAddErinnerung(Model model) {
+		return "addErinnerung";
+	}
 
-        ErinnerungForm erinnerungForm = new ErinnerungForm();
-        model.addAttribute("erinnerungForm", erinnerungForm);
+	@PostMapping(value = {"/addErinnerung"})
+	public String saveErinnerung(Model model, //
+			@ModelAttribute("erinnerungForm") ErinnerungForm erinnerungForm) {
 
-        return "addErinnerung";
-    }
+		String bezeichnung = erinnerungForm.getBezeichnung();
+		String medikament = erinnerungForm.getMedikament();
+		int dosis = erinnerungForm.getDosis();
+		boolean aktiv = erinnerungForm.isAktiv();
+		boolean montag = erinnerungForm.isMontag();
+		boolean dienstag = erinnerungForm.isDienstag();
+		boolean mittwoch = erinnerungForm.isMittwoch();
+		boolean donnerstag = erinnerungForm.isDonnerstag();
+		boolean freitag = erinnerungForm.isFreitag();
+		boolean samstag = erinnerungForm.isSamstag();
+		boolean sonntag = erinnerungForm.isSonntag();
+		Date anfangsdatum = erinnerungForm.getAnfangsdatum();
+		Date enddatum = erinnerungForm.getEnddatum();
 
-    @PostMapping(value = {"/addErinnerung"})
-    public String saveErinnerung(Model model, //
-                                 @ModelAttribute("erinnerungForm") ErinnerungForm erinnerungForm) {
+		if (bezeichnung != null && anfangsdatum != null) {
+			Erinnerung erinnerung = new Erinnerung(bezeichnung, medikament, dosis, aktiv, montag, dienstag, mittwoch,
+					donnerstag, freitag, samstag, sonntag, anfangsdatum, enddatum);
+			erinnerungenDao.saveAndFlush(erinnerung);
+			return "redirect:/erinnerungenListe";
+		}
 
-        String bezeichnung = erinnerungForm.getBezeichnung();
-        String medikament = erinnerungForm.getMedikament();
-        int dosis = erinnerungForm.getDosis();
-        boolean aktiv = erinnerungForm.isAktiv();
-        boolean montag = erinnerungForm.isMontag();
-        boolean dienstag = erinnerungForm.isDienstag();
-        boolean mittwoch = erinnerungForm.isMittwoch();
-        boolean donnerstag = erinnerungForm.isDonnerstag();
-        boolean freitag = erinnerungForm.isFreitag();
-        boolean samstag = erinnerungForm.isSamstag();
-        boolean sonntag = erinnerungForm.isSonntag();
-        Date anfangsdatum = erinnerungForm.getAnfangsdatum();
-        Date enddatum = erinnerungForm.getEnddatum();
+		model.addAttribute("errorMessage", errorMessage);
+		return "addErinnerung";
+	}
 
-        if (bezeichnung != null && anfangsdatum != null) {
-            Erinnerung erinnerung = new Erinnerung(bezeichnung, medikament, dosis, aktiv, montag, dienstag, mittwoch, donnerstag, freitag, samstag, sonntag, anfangsdatum, enddatum);
-            erinnerungenDao.saveAndFlush(erinnerung);
-            return "redirect:/erinnerungenListe";
-        }
+	@GetMapping(value = {"/deleteErinnerung"})
+	public String showDeleteErinnerung(Model model) {
 
-        model.addAttribute("errorMessage", errorMessage);
-        return "addErinnerung";
-    }
+		ErinnerungForm erinnerungForm = new ErinnerungForm();
+		model.addAttribute("erinnerungForm", erinnerungForm);
 
-    @GetMapping(value = {"/deleteErinnerung"})
-    public String showDeleteErinnerung(Model model) {
+		final List<Erinnerung> erinnerungenListe = (List<Erinnerung>) erinnerungenDao.findAll();
+		model.addAttribute("erinnerung", erinnerungenListe);
 
-        ErinnerungForm erinnerungForm = new ErinnerungForm();
-        model.addAttribute("erinnerungForm", erinnerungForm);
+		return "deleteErinnerung";
+	}
 
-        final List<Erinnerung> erinnerungenListe = (List<Erinnerung>) erinnerungenDao.findAll();
-        model.addAttribute("erinnerung", erinnerungenListe);
+	@PostMapping(value = {"/deleteErinnerung"})
+	public String deleteErinnerung(Model model, @ModelAttribute("erinnerungForm") ErinnerungForm erinnerungForm) {
+		String bezeichnung = erinnerungForm.getBezeichnung();
+		if (bezeichnung != null) {
+			Erinnerung erinnerung = erinnerungenDao.getErinnerungByBezeichnung(bezeichnung);
+			erinnerungenDao.delete(erinnerung);
+			return "redirect:/erinnerungenListe";
+		}
+		model.addAttribute("errorMessage", errorMessage);
+		return "deleteErinnerung";
+	}
 
-        return "deleteErinnerung";
-    }
-
-    @PostMapping(value = {"/deleteErinnerung"})
-    public String deleteErinnerung(Model model, @ModelAttribute("erinnerungForm") ErinnerungForm erinnerungForm) {
-        String bezeichnung = erinnerungForm.getBezeichnung();
-        if (bezeichnung != null) {
-            Erinnerung erinnerung = erinnerungenDao.getErinnerungByBezeichnung(bezeichnung);
-            erinnerungenDao.delete(erinnerung);
-            return "redirect:/erinnerungenListe";
-        }
-        model.addAttribute("errorMessage", errorMessage);
-        return "deleteErinnerung";
-    }
-
-    // Kalender
-    @GetMapping(value = {"/kalender"})
+	// Kalender
+	@GetMapping(value = {"/kalender"})
 	public String kalender(Model model) throws IOException {
 		kalenderPopulationService.parseAllToJson();
 
-        return "kalender";
-    }
+		return "kalender";
+	}
 
-    @GetMapping(value = {"/addTermin"})
-    public String showAddTermin(Model model) {
+	@GetMapping(value = {"/addTermin"})
+	public String showAddTermin(Model model) {
 
-        TerminForm terminForm = new TerminForm();
-        model.addAttribute("terminForm", terminForm);
+		TerminForm terminForm = new TerminForm();
+		model.addAttribute("terminForm", terminForm);
 
-        return "addTermin";
-    }
+		return "addTermin";
+	}
 
-    @PostMapping(value = {"/addTermin"})
-    public String saveTermin(Model model, @ModelAttribute("terminForm") TerminForm terminForm) {
+	@PostMapping(value = {"/addTermin"})
+	public String saveTermin(Model model, @ModelAttribute("terminForm") TerminForm terminForm) {
 
-        String uhrzeitBezeichnung = terminForm.getUhrzeitBezeichnung();
-        LocalDate datum = terminForm.getDatum();
-        String weblink = terminForm.getWebLink();
-        boolean dringend = terminForm.isDringend();
-        String anmerkungen = terminForm.getAnmerkungen();
+		String uhrzeitBezeichnung = terminForm.getUhrzeitBezeichnung();
+		LocalDate datum = terminForm.getDatum();
+		String weblink = terminForm.getWebLink();
+		boolean dringend = terminForm.isDringend();
+		String anmerkungen = terminForm.getAnmerkungen();
 
-        if (uhrzeitBezeichnung != null && uhrzeitBezeichnung.length() > 0 && datum != null) {
-            Termin termin = new Termin(uhrzeitBezeichnung, datum, weblink, dringend, anmerkungen);
-            terminDao.saveAndFlush(termin);
-            return "redirect:/kalender";
-        }
+		if (uhrzeitBezeichnung != null && uhrzeitBezeichnung.length() > 0 && datum != null) {
+			Termin termin = new Termin(uhrzeitBezeichnung, datum, weblink, dringend, anmerkungen);
+			terminDao.saveAndFlush(termin);
+			return "redirect:/kalender";
+		}
 
-        model.addAttribute("errorMessage", errorMessage);
-        return "addTermin";
-    }
+		model.addAttribute("errorMessage", errorMessage);
+		return "addTermin";
+	}
 }
