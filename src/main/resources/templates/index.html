@@ -41,16 +41,77 @@
     </div>
 </div>
 <br>
+<div class="row">
+    <div style="width: 100%; text-align: center">
+        <h4>
+            <script type="text/javascript" src="js/datum.js"></script>
+        </h4>
+    </div>
+</div>
 
-<div class="card-group" style="width: 50rem;">
-    <div class="card">
+<br>
+
+<div class="card-group" style="width: 80rem;">
+    <div class="card" >
         <div class="card-body">
-            <h5 class="card-title">Was steht heute an?</h5>
-            <p class="card-text">  </p>
-            <p class="card-text"><small></small></p>
+            <h5 class="card-title">Heutige Erinnerung</h5>
+            <br>
+            <p class="card-text">
+            <table class="table" style="width: 20rem;">
+                <thead class="thead-light">
+                <tr>
+                    <th scope="col">Bezeichnung</th>
+                    <th scope="col">Dosis</th>
+                    <th scope="col"></th>
+
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="erinnerung : ${erinnerung}">
+                    <td th:utext="${erinnerung.bezeichnung}">...</td>
+                    <td th:utext="${erinnerung.dosis}">...</td>
+                    <td>  <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <input type="checkbox" aria-label="Checkbox for following text input">
+                        </div>
+                    </div></td>
+                </tr>
+                </tbody>
+            </table>
+            </p>
+        </div>
+    </div>
+
+    <div class="card" >
+        <div class="card-body">
+            <h5 class="card-title">Heutige Termine</h5>
+            <br>
+            <p class="card-text">
+            <table class="table" style="width: 20rem;">
+                <thead class="thead-light">
+                <tr>
+                    <th scope="col">Uhrzeit und Bezeichnung</th>
+                    <th scope="col"></th>
+
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="termin : ${termin}">
+                    <td th:utext="${termin.uhrzeitBezeichnung}">...</td>
+                    <td>  <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <input type="checkbox" aria-label="Checkbox for following text input">
+                        </div>
+                    </div></td>
+                </tr>
+                </tbody>
+            </table>
+            </p>
         </div>
     </div>
 </div>
+
+<br>
 
 <div/>
 <script src="webjars/bootstrap/3.3.6/js/bootstrap.min.js"></script>

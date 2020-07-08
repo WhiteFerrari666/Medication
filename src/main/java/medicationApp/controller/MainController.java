@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 
+import medicationApp.dao.TerminDao;
+import medicationApp.form.TerminForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -14,10 +16,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import medicationApp.dao.ErinnerungenDao;
 import medicationApp.dao.MedikamentDao;
-import medicationApp.dao.TerminDao;
 import medicationApp.form.ErinnerungForm;
 import medicationApp.form.MedikamentForm;
-import medicationApp.form.TerminForm;
 import medicationApp.model.Erinnerung;
 import medicationApp.model.Medikament;
 import medicationApp.model.Termin;
