@@ -1,6 +1,5 @@
 package medicationApp.controller;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -15,6 +14,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import medicationApp.dao.ErinnerungenDao;
+import medicationApp.dao.MedikamentDao;
 import medicationApp.dao.TerminDao;
 import medicationApp.form.ErinnerungForm;
 import medicationApp.form.MedikamentForm;
@@ -22,9 +22,7 @@ import medicationApp.form.TerminForm;
 import medicationApp.model.Erinnerung;
 import medicationApp.model.Medikament;
 import medicationApp.model.Termin;
-
-import javax.swing.*;
-//import medicationApp.service.KalenderPopulationService;
+import medicationApp.service.KalenderPopulationService;
 
 @Controller
 public class MainController {
@@ -39,8 +37,8 @@ public class MainController {
     private MedikamentDao medikamentDao;
 
 
-//	@Autowired
-//	private KalenderPopulationService kalenderPopulationService;
+	@Autowired
+	private KalenderPopulationService kalenderPopulationService;
 
     static Date dt = new Date();
 
@@ -195,8 +193,8 @@ public class MainController {
 
     // Kalender
     @GetMapping(value = {"/kalender"})
-    public String kalender(Model model) {
-//		kalenderPopulationService.parseAllToJson();
+	public String kalender(Model model) throws IOException {
+		kalenderPopulationService.parseAllToJson();
 
         return "kalender";
     }
