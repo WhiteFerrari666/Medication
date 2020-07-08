@@ -1,5 +1,6 @@
 package medicationApp.controller;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -107,15 +108,21 @@ public class MainController {
         model.addAttribute("errorMessage", errorMessage);
         return "addMedikament";
     }
-//Mein Tag
+
+    //Mein Tag
     @GetMapping(value = {"/meinTag"})
     public String meinTag(Model model) {
         final List<Erinnerung> erinnerungenListe = (List<Erinnerung>) erinnerungenDao.findAll();
         model.addAttribute("erinnerung", erinnerungenListe);
+
+        LocalDate date = LocalDate.now();
+        final List<Termin> terminListe = terminDao.findAllByDatumIs(date);
+        model.addAttribute("termin", terminListe);
+
         return "meinTag";
     }
 
-//Erinnerung
+    //Erinnerung
     @GetMapping(value = {"/erinnerungenListe"})
     public String erinnerungenListe(Model model) {
 
@@ -207,7 +214,7 @@ public class MainController {
     public String saveTermin(Model model, @ModelAttribute("terminForm") TerminForm terminForm) {
 
         String uhrzeitBezeichnung = terminForm.getUhrzeitBezeichnung();
-        Date datum = terminForm.getDatum();
+        LocalDate datum = terminForm.getDatum();
         String weblink = terminForm.getWebLink();
         boolean dringend = terminForm.isDringend();
         String anmerkungen = terminForm.getAnmerkungen();

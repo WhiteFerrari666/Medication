@@ -1,5 +1,6 @@
 package medicationApp.form;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -8,7 +9,7 @@ public class TerminForm {
 
 	private String uhrzeitBezeichnung;
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	private Date datum;
+	private LocalDate datum;
 	private String webLink;
 	private boolean dringend;
 	private String anmerkungen;
@@ -21,11 +22,11 @@ public class TerminForm {
 		this.uhrzeitBezeichnung = uhrzeitBezeichnung;
 	}
 
-	public Date getDatum() {
+	public LocalDate getDatum() {
 		return datum;
 	}
 
-	public void setDatum(Date datum) {
+	public void setDatum(LocalDate datum) {
 		this.datum = datum;
 	}
 
