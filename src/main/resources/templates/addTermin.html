@@ -31,7 +31,7 @@
         </ul>
     </div>
 </nav>
-
+<br>
 <div class="container">
     <div class="row">
         <div style="width:100%; text-align:center">
@@ -39,71 +39,7 @@
         </div>
     </div>
 </div>
-
-<!--  <form th:action="@{/addTermin}"
-        th:object="${terminForm}" method="POST">
-
-      <div class="row" style="width: 100%; text-align: left">
-          <div class="col-md-4"></div>
-          <div class="col-md-1">
-              Uhrzeit und Bezeichnung:
-          </div>
-          <div class="col-md-4">
-              <input type="text" th:field="*{uhrzeitBezeichnung}"/>
-          </div>
-      </div>
-      <div class="row">
-          <div class="col-md-4"></div>
-          <div class="col-md-1">
-              Datum:
-          </div>
-          <div class="col-md-6">
-              <input type="date" th:field="*{datum}"/>
-          </div>
-      </div>
-
-      <div class="row">
-          <div class="col-md-4"></div>
-          <div class="col-md-1">
-              Website:
-          </div>
-          <div class="col-md-6">
-              <input type="text" th:field="*{webLink}"/>
-          </div>
-      </div>
-
-      <div class="row">
-          <div class="col-md-4"></div>
-          <div class="col-md-1">
-              Ist der Termin dringend?
-          </div>
-          <div class="col-md-6">
-              <input type="checkbox" th:field="*{dringend}"/>
-          </div>
-      </div>
-
-      <div class="row">
-          <div class="col-md-4"></div>
-          <div class="col-md-1">
-              Anmerkungen:
-          </div>
-          <div class="col-md-6">
-              <input type="text" th:field="*{anmerkungen}"/>
-          </div>
-      </div>
-      <div class="row">
-          <div style="width:100%; text-align:center">
-              <a class="btn" style="background-color:#48475a; color:#1edc82;" href="kalender" role="button">abbrechen</a>
-              <input type="submit" style="background-color:#1edc82; color:#48475a;" class="btn"
-                     value="Termin hinzufügen"/>
-              <div th:if="${errorMessage}" th:utext="${errorMessage}"
-                   style="color:#4fdbff;font-style:italic;">
-                  ...
-              </div>
-          </div>
-      </div>
-  </form>-->
-
+<br/>
 <form th:action="@{/addTermin}"
       th:object="${terminForm}" method="POST">
     <div class="container">
@@ -123,8 +59,8 @@
             </div>
 
             <div class="form-group row">
-                <label for="inputDringend" class="col-sm-4 col-form-label">Ist der Termin dringend?</label>
-                <div class="col-1">
+                <label for="inputDringend" class="col-sm-2 col-form-label">Ist der Termin dringend?</label>
+                <div class="col-md-6">
                     <input type="checkbox" th:field="*{dringend}" class="form-control" id="inputDringend">
                 </div>
             </div>
