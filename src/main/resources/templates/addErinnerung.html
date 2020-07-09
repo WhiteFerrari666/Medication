@@ -46,20 +46,17 @@
                 <label for="inputBezeichnung" class="col-sm-2 col-form-label">Bezeichnung</label>
                 <div class="col-md-6">
                     <input type="text" th:field="*{bezeichnung}" class="form-control" id="inputBezeichnung"
-                           placeholder="Bitte eine Bezeichnung eintragen">
+                           placeholder="Bitte eine einzigartige Bezeichnung eintragen">
                 </div>
             </div>
             <div class="form-group row">
                 <label for="inputMedikament" class="col-sm-2 col-form-label">Medikament</label>
                 <div class="col-md-6">
-                    <input type="text" th:field="*{medikament}" class="form-control" id="inputMedikament"
-                           placeholder="Bitte ein Medikament eintragen">
-                </div>
-            </div>
-            <div class="form-group row">
-                <label for="inputDosis" class="col-sm-2 col-form-label">Dosis</label>
-                <div class="col-md-6">
-                    <input type="number" th:field="*{dosis}" class="form-control" id="inputDosis">
+                    <select class="form-control" th:field="*{medikament}" id="inputMedikament">
+                        <option value="">Bitte auswählen</option>
+                        <option th:each="medikament : ${medikament}" th:value="${medikament.name}"
+                                th:text="${medikament.name}"></option>
+                    </select>
                 </div>
             </div>
 
@@ -139,7 +136,7 @@
             <a class="btn" style="background-color:#48475a; color:#1edc82;" href="erinnerungenListe" role="button">abbrechen</a>
             <input type="submit" style="background-color:#1edc82; color:#48475a;" class="btn" value="hinzufügen"/>
             <!-- Check if errorMessage is not null and not empty -->
-            <div th:if="${errorMessage}" th:utext="${errorMessage}"
+            <div th:if="${errorMessageErinnerung}" th:utext="${errorMessageErinnerung}"
                  style="color:#4fdbff;font-style:italic;">
                 ...
             </div>

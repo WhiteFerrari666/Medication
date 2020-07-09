@@ -3,6 +3,7 @@ package medicationApp.model;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
@@ -17,21 +18,11 @@ public class Erinnerung {
     @Column(name = "bezeichnung", nullable = false, unique = true)
     private String bezeichnung;
 
-    //    @OneToMany
-//    @JoinColumn(name = "medikament_name")
-//    @ForeignKey
-    @Column(name = "medikament", nullable = true)
-    private String medikament;
-//    private Medikament medikamentenName;
-//    = medikamentenName.toString()
-
 //    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumns({
-//            @JoinColumn(name="medikament_name", referencedColumnName="name"),
-//            @JoinColumn(name="medikament_dosis", referencedColumnName="dosis")})
-
-    @Column(name = "dosis", nullable = true)
-    private int dosis;
+//    @JoinColumn(name = "medikamente_name", referencedColumnName="name")
+//    private Medikament medikament;
+    @Column(name="medikamente_name", nullable = true)
+    private String medikament;
 
     @Column(name = "aktiv", nullable = false)
     private boolean aktiv;
@@ -59,20 +50,19 @@ public class Erinnerung {
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name = "anfangsdatum", nullable = false)
-    private Date anfangsdatum;
+    private LocalDate anfangsdatum;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    @Column(name = "enddatum", nullable = true)
-    private Date enddatum;
+    @Column(name = "enddatum", nullable = false)
+    private LocalDate enddatum;
 
     public Erinnerung() {
 
     }
 
-    public Erinnerung(String bezeichnung, String medikament, int dosis, boolean aktiv, boolean montag, boolean dienstag, boolean mittwoch, boolean donnerstag, boolean freitag, boolean samstag, boolean sonntag, Date anfangsdatum, Date enddatum) {
+    public Erinnerung(String bezeichnung, String medikament, boolean aktiv, boolean montag, boolean dienstag, boolean mittwoch, boolean donnerstag, boolean freitag, boolean samstag, boolean sonntag, LocalDate anfangsdatum, LocalDate enddatum) {
         this.bezeichnung = bezeichnung;
         this.medikament = medikament;
-        this.dosis = dosis;
         this.aktiv = aktiv;
         this.montag = montag;
         this.dienstag = dienstag;
@@ -107,14 +97,6 @@ public class Erinnerung {
 
     public void setMedikament(String medikament) {
         this.medikament = medikament;
-    }
-
-    public int getDosis() {
-        return dosis;
-    }
-
-    public void setDosis(int dosis) {
-        this.dosis = dosis;
     }
 
     public boolean isAktiv() {
@@ -181,19 +163,19 @@ public class Erinnerung {
         this.sonntag = sonntag;
     }
 
-    public Date getAnfangsdatum() {
+    public LocalDate getAnfangsdatum() {
         return anfangsdatum;
     }
 
-    public void setAnfangsdatum(Date anfangsdatum) {
+    public void setAnfangsdatum(LocalDate anfangsdatum) {
         this.anfangsdatum = anfangsdatum;
     }
 
-    public Date getEnddatum() {
+    public LocalDate getEnddatum() {
         return enddatum;
     }
 
-    public void setEnddatum(Date enddatum) {
+    public void setEnddatum(LocalDate enddatum) {
         this.enddatum = enddatum;
     }
 }

@@ -1,13 +1,14 @@
 package medicationApp.form;
 
+import medicationApp.model.Medikament;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 public class ErinnerungForm {
     private String bezeichnung;
     private String medikament;
-    private int dosis;
     private boolean aktiv;
     private boolean montag;
     private boolean dienstag;
@@ -17,9 +18,9 @@ public class ErinnerungForm {
     private boolean samstag;
     private boolean sonntag;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date anfangsdatum;
+    private LocalDate anfangsdatum;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date enddatum;
+    private LocalDate enddatum;
 
     public String getBezeichnung() {
         return bezeichnung;
@@ -35,14 +36,6 @@ public class ErinnerungForm {
 
     public void setMedikament(String medikament) {
         this.medikament = medikament;
-    }
-
-    public int getDosis() {
-        return dosis;
-    }
-
-    public void setDosis(int dosis) {
-        this.dosis = dosis;
     }
 
     public boolean isAktiv() {
@@ -109,19 +102,19 @@ public class ErinnerungForm {
         this.sonntag = sonntag;
     }
 
-    public Date getAnfangsdatum() {
+    public LocalDate getAnfangsdatum() {
         return anfangsdatum;
     }
 
-    public void setAnfangsdatum(Date anfangsdatum) {
+    public void setAnfangsdatum(LocalDate anfangsdatum) {
         this.anfangsdatum = anfangsdatum;
     }
 
-    public Date getEnddatum() {
+    public LocalDate getEnddatum() {
         return enddatum;
     }
 
-    public void setEnddatum(Date enddatum) {
+    public void setEnddatum(LocalDate enddatum) {
         this.enddatum = enddatum;
     }
 }

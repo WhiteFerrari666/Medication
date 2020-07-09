@@ -46,7 +46,6 @@
             <p></p>
             <a class="btn" style="background-color:#48475a; color:#1edc82;" href="deleteErinnerung" role="button">Erinnerung
                 entfernen</a>
-            <!--        </div>-->
         </div>
     </div>
 </div>
@@ -56,7 +55,6 @@
         <tr>
             <th scope="col">Bezeichnung</th>
             <th scope="col">Medikament</th>
-            <th scope="col">Dosis</th>
             <th scope="col">Aktiv?</th>
             <th scope="col">Montag</th>
             <th scope="col">Dienstag</th>
@@ -72,7 +70,6 @@
         <tr th:each="erinnerung : ${erinnerung}">
             <td th:utext="${erinnerung.bezeichnung}">...</td>
             <td th:utext="${erinnerung.medikament}">...</td>
-            <td th:utext="${erinnerung.dosis}">...</td>
             <td th:utext="${erinnerung.aktiv}">...</td>
             <td th:utext="${erinnerung.montag}">...</td>
             <td th:utext="${erinnerung.dienstag}">...</td>

@@ -59,6 +59,11 @@
             <div style="width:100%; text-align:center">
                 <a class="btn" style="background-color:#48475a; color:#1edc82;" href="erinnerungenListe" role="button">abbrechen</a>
                 <input type="submit" style="background-color:#1edc82; color:#48475a;" class="btn" value="entfernen"/>
+                <!-- Check if errorMessage is not null and not empty -->
+                <div th:if="${errorMessageErinnerung}" th:utext="${errorMessageErinnerung}"
+                     style="color:#4fdbff;font-style:italic;">
+                    ...
+                </div>
             </div>
         </div>
     </div>

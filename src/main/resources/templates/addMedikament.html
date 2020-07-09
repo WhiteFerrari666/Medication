@@ -81,7 +81,7 @@
             <a class="btn" style="background-color:#48475a; color:#1edc82;" href="medikamentenListe" role="button">abbrechen</a>
             <input type="submit" style="background-color:#1edc82; color:#48475a;" class="btn" value="hinzufügen"/>
             <!-- Check if errorMessage is not null and not empty -->
-            <div th:if="${errorMessage}" th:utext="${errorMessage}"
+            <div th:if="${errorMessageMedikament}" th:utext="${errorMessageMedikament}"
                  style="color:#4fdbff;font-style:italic;">
                 ...
             </div>
