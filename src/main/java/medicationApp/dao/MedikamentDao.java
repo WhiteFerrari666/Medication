@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface MedikamentDao extends JpaRepository <Medikament, Long> {
-
+Medikament getMedikamentByName(String name);
 }

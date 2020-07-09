@@ -2,10 +2,9 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8"/>
-    <title>Medikamenten-Liste</title>
+    <title>Medikament entfernen</title>
     <link rel="stylesheet" href="css/bootstrap.minNeu.css">
     <link rel="stylesheet" type="text/css" th:href="@{/css/navbar.css}"/>
-
     <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
 </head>
 <body>
@@ -28,48 +27,41 @@
             <li class="nav-item">
                 <a class="nav-link" th:href="@{/kalender}">Mein Kalender</a>
         </ul>
-
     </div>
 </nav>
 <br>
 <div class="container">
     <div class="row">
-        <div style="width: 100%; text-align: center">
-            <h1>Meine Medikamente</h1>
+        <div style="width:100%; text-align:center">
+            <h1>Medikament entfernen</h1>
         </div>
     </div>
 </div>
 <br/>
-<div class="container">
-    <div class="row">
-        <div style="width:100%; text-align:right">
-            <a class="btn" style="background-color:#1edc82; color:#48475a" href="addMedikament" role="button">Medikament
-                hinzufügen</a>
-            <p></p>
-            <a class="btn" style="background-color:#48475a; color:#1edc82;" href="deleteMedikament" role="button">Medikament
-                entfernen</a>
+<form th:action="@{/deleteMedikament}"
+      th:object="${medikamentForm}" method="POST">
+    <div class="container">
+        <div style="width:80rem; margin: 0 auto;">
+            <div class="form-group row">
+                <label for="inputBezeichnung" class="col-sm-2 col-form-label">Bezeichnung</label>
+                <div class="col-md-6">
+                    <select class="form-control" th:field="*{name}" id="inputBezeichnung">
+                        <option value="">Bitte auswählen</option>
+                        <option th:each="medikament : ${medikament}" th:value="${medikament.name}"
+                                th:text="${medikament.name}"></option>
+                    </select>
+                </div>
+            </div>
         </div>
     </div>
-</div>
-<br>
-<table class="table" style="width: 65rem; margin: 0 auto;">
-    <thead class="thead-light">
-    <tr>
-        <th scope="col">Name</th>
-        <th scope="col">Form</th>
-        <th scope="col">Dosis</th>
-        <th scope="col">Rezeptpflichtig</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="medikament : ${medikament}">
-        <td th:utext="${medikament.name}">...</td>
-        <td th:utext="${medikament.form}">...</td>
-        <td th:utext="${medikament.dosis}">...</td>
-        <td th:utext="${medikament.rezeptpflichtig}">...</td>
-    </tr>
-
-    </tbody>
-</table>
+    <div class="container">
+        <div class="row">
+            <div style="width:100%; text-align:center">
+                <a class="btn" style="background-color:#48475a; color:#1edc82;" href="medikamentenListe" role="button">abbrechen</a>
+                <input type="submit" style="background-color:#1edc82; color:#48475a;" class="btn" value="entfernen"/>
+            </div>
+        </div>
+    </div>
+</form>
 </body>
 </html>

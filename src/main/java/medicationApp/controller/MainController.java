@@ -110,6 +110,30 @@ public class MainController {
 		return "addMedikament";
 	}
 
+	@GetMapping(value = {"/deleteMedikament"})
+	public String showDeleteMedikament(Model model) {
+
+		MedikamentForm medikamentForm = new MedikamentForm();
+		model.addAttribute("medikamentForm", medikamentForm);
+
+		final List<Medikament> medikamentenListe = (List<Medikament>) medikamentDao.findAll();
+		model.addAttribute("medikament", medikamentenListe);
+
+		return "deleteMedikament";
+	}
+
+	@PostMapping(value = {"/deleteMedikament"})
+	public String deleteMedikament(Model model, @ModelAttribute("medikamentForm") MedikamentForm medikamentForm) {
+		String bezeichnung = medikamentForm.getName();
+		if (bezeichnung != null) {
+			Medikament medikament = medikamentDao.getMedikamentByName(bezeichnung);
+			medikamentDao.delete(medikament);
+			return "redirect:/medikamentenListe";
+		}
+		model.addAttribute("errorMessage", errorMessage);
+		return "deleteMedikament";
+	}
+
 	// Erinnerung
 	@GetMapping(value = {"/erinnerungenListe"})
 	public String erinnerungenListe(Model model) {
