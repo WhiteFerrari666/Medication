@@ -18,9 +18,6 @@ public class Erinnerung {
     @Column(name = "bezeichnung", nullable = false, unique = true)
     private String bezeichnung;
 
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "medikamente_name", referencedColumnName="name")
-//    private Medikament medikament;
     @Column(name="medikamente_name", nullable = true)
     private String medikament;
 
