@@ -64,7 +64,7 @@ public class MainController {
         LocalDate date = LocalDate.now();
 
         model.addAttribute("message", welcomeMessage);
-        final List<Erinnerung> erinnerungenListe = erinnerungenDao.findAllByAnfangsdatumBeforeAndEnddatumAfter(date, date);
+        final List<Erinnerung> erinnerungenListe = erinnerungenDao.findAllByAnfangsdatumBeforeAndEnddatumAfterAndAktivIsTrue(date, date);
         model.addAttribute("erinnerung", erinnerungenListe);
 
         final List<Termin> terminListe = terminDao.findAllByDatumIs(date);
@@ -77,7 +77,7 @@ public class MainController {
     @GetMapping(value = {"/medikamentenListe"})
     public String medikamentenListe(Model model) {
 
-        final List<Medikament> medikamentenListe = (List<Medikament>) medikamentDao.findAll();
+        final List<Medikament> medikamentenListe = medikamentDao.findAll();
         model.addAttribute("medikament", medikamentenListe);
         return "medikamentenListe";
     }
@@ -116,7 +116,7 @@ public class MainController {
         MedikamentForm medikamentForm = new MedikamentForm();
         model.addAttribute("medikamentForm", medikamentForm);
 
-        final List<Medikament> medikamentenListe = (List<Medikament>) medikamentDao.findAll();
+        final List<Medikament> medikamentenListe = medikamentDao.findAll();
         model.addAttribute("medikament", medikamentenListe);
 
         return "deleteMedikament";
@@ -138,7 +138,7 @@ public class MainController {
     @GetMapping(value = {"/erinnerungenListe"})
     public String erinnerungenListe(Model model) {
 
-        final List<Erinnerung> erinnerungenListe = (List<Erinnerung>) erinnerungenDao.findAll();
+        final List<Erinnerung> erinnerungenListe = erinnerungenDao.findAll();
         model.addAttribute("erinnerung", erinnerungenListe);
 
         return "erinnerungenListe";
@@ -153,7 +153,7 @@ public class MainController {
         MedikamentForm medikamentForm = new MedikamentForm();
         model.addAttribute("medikamentForm", medikamentForm);
 
-        final List<Medikament> medikamentenListe = (List<Medikament>) medikamentDao.findAll();
+        final List<Medikament> medikamentenListe = medikamentDao.findAll();
         model.addAttribute("medikament", medikamentenListe);
 
         return "addErinnerung";
