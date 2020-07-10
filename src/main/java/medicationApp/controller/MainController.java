@@ -64,7 +64,7 @@ public class MainController {
         LocalDate date = LocalDate.now();
 
         model.addAttribute("message", welcomeMessage);
-        final List<Erinnerung> erinnerungenListe = erinnerungenDao.findAllByAnfangsdatumBeforeAndEnddatumAfterAndAktivIsTrue(date, date);
+        final List<Erinnerung> erinnerungenListe = erinnerungenDao.findAllByAnfangsdatumBeforeOrAnfangsdatumEqualsAndEnddatumAfterOrEnddatumEqualsAndAktivIsTrue(date, date, date, date);
         model.addAttribute("erinnerung", erinnerungenListe);
 
         final List<Termin> terminListe = terminDao.findAllByDatumIs(date);

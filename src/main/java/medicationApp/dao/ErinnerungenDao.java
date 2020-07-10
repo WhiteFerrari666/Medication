@@ -12,5 +12,5 @@ import java.util.List;
 @Repository
 public interface ErinnerungenDao extends JpaRepository<Erinnerung, Long> {
 	Erinnerung getErinnerungByBezeichnung(String bezeichnung);
-	List<Erinnerung> findAllByAnfangsdatumBeforeAndEnddatumAfterAndAktivIsTrue(LocalDate date, LocalDate dateZwei);
+	List<Erinnerung> findAllByAnfangsdatumBeforeOrAnfangsdatumEqualsAndEnddatumAfterOrEnddatumEqualsAndAktivIsTrue(LocalDate date, LocalDate dateZwei, LocalDate dateDrei, LocalDate dateVier);
 }
